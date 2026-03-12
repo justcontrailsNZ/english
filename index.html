@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Year 4 Kiwi English Adventure!</title>
+    <title>Kiwi English Adventure!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap');
 
@@ -15,7 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         #game-container {
@@ -24,8 +24,9 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             padding: 30px;
             width: 90%;
-            max-width: 600px;
+            max-width: 700px;
             text-align: center;
+            margin: 20px;
         }
 
         h1 {
@@ -35,18 +36,95 @@
             font-size: 2.5rem;
         }
 
-        #score-board {
+        /* --- SETUP MENU STYLES --- */
+        #setup-menu {
+            display: block;
+        }
+
+        .menu-section {
+            margin-bottom: 25px;
+            background-color: #f1f2f6;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .menu-section h3 {
+            margin-top: 0;
+            color: #2F3542;
+        }
+
+        select {
+            font-size: 1.2rem;
+            font-family: 'Nunito', sans-serif;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #a4b0be;
+            width: 80%;
+            max-width: 300px;
+            font-weight: bold;
+            color: #2f3542;
+        }
+
+        #start-btn, #restart-btn {
+            background-color: #2ED573;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Fredoka One', cursive;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        #start-btn:hover, #restart-btn:hover {
+            transform: scale(1.05);
+            background-color: #26de81;
+        }
+
+        #restart-btn {
+            display: none;
+            background-color: #FF6B6B;
+        }
+
+        /* --- GAMEPLAY STYLES --- */
+        #game-play-area {
+            display: none;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
             font-size: 1.2rem;
             font-weight: bold;
             color: #4ECDC4;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        #progress-container {
+            width: 100%;
+            background-color: #f1f2f6;
+            border-radius: 10px;
+            height: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background-color: #2ED573;
+            width: 0%;
+            transition: width 0.4s ease;
         }
 
         #question-box {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #2F3542;
-            margin-bottom: 30px;
-            min-height: 60px;
+            margin-bottom: 25px;
+            min-height: 70px;
+            font-weight: 700;
         }
 
         .btn-grid {
@@ -60,7 +138,7 @@
             border: 3px solid #F5CD79;
             border-radius: 15px;
             padding: 15px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-family: 'Nunito', sans-serif;
             font-weight: bold;
             color: #2F3542;
@@ -70,41 +148,27 @@
 
         .btn:hover {
             background-color: #F5CD79;
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         #feedback {
             margin-top: 20px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             min-height: 35px;
         }
 
         .correct { color: #2ED573; }
         .wrong { color: #FF4757; }
-
-        #restart-btn {
-            display: none;
-            margin-top: 20px;
-            background-color: #FF6B6B;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        #restart-btn:hover {
-            background-color: #FF4757;
-        }
         
         .skill-tag {
-            font-size: 0.9rem;
-            color: #a4b0be;
+            font-size: 0.85rem;
+            background-color: #dfe4ea;
+            color: #57606f;
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
             margin-bottom: 15px;
-            display: block;
         }
     </style>
 </head>
@@ -112,141 +176,291 @@
 
     <div id="game-container">
         <h1>Kiwi English Adventure!</h1>
-        <div id="score-board">Score: <span id="score">0</span></div>
-        
-        <div id="game-area">
-            <span class="skill-tag" id="skill-tag">Skill: Loading...</span>
-            <div id="question-box">Loading question...</div>
-            <div class="btn-grid" id="options">
-                <!-- Buttons will be generated by JavaScript -->
+
+        <!-- Setup Menu -->
+        <div id="setup-menu">
+            <div class="menu-section">
+                <h3>Select Year Level</h3>
+                <select id="year-select">
+                    <option value="2">Year 2</option>
+                    <option value="4" selected>Year 4</option>
+                </select>
             </div>
+            
+            <div class="menu-section">
+                <h3>How many questions?</h3>
+                <select id="length-select">
+                    <option value="10">10 Questions (Quick Play)</option>
+                    <option value="20">20 Questions (Standard Play)</option>
+                    <option value="all">All Topics (Challenge!)</option>
+                </select>
+            </div>
+
+            <button id="start-btn" onclick="initializeGame()">Start Game!</button>
+        </div>
+        
+        <!-- Game Play Area -->
+        <div id="game-play-area">
+            <div class="stats-bar">
+                <span id="question-counter">Question: 1 / 10</span>
+                <span>Score: <span id="score">0</span></span>
+            </div>
+
+            <div id="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            
+            <div class="skill-tag" id="skill-tag">Skill: Loading...</div>
+            <div id="question-box">Loading question...</div>
+            <div class="btn-grid" id="options"></div>
             <div id="feedback"></div>
         </div>
 
-        <button id="restart-btn" onclick="startGame()">Play Again!</button>
+        <button id="restart-btn" onclick="backToMenu()">Back to Menu</button>
     </div>
 
     <script>
-        // Questions based on Year 4 English Syllabus
-        const questions = [
-            {
-                question: "Choose the correct article: I am eating ___ apple.",
-                options: ["a", "an", "the", "two"],
-                answer: "an",
-                skill: "QQ.1 Articles (a or an)"
-            },
-            {
-                question: "What type of sentence is this: 'What time does the movie start?'",
-                options: ["Statement", "Command", "Question", "Exclamation"],
-                answer: "Question",
-                skill: "KK.1 Sentences, fragments and run-ons"
-            },
-            {
-                question: "Which word is a synonym (means the same) for 'Happy'?",
-                options: ["Sad", "Angry", "Joyful", "Tired"],
-                answer: "Joyful",
-                skill: "DD.1 Synonyms and antonyms"
-            },
-            {
-                question: "What is the plural of 'mouse'?",
-                options: ["Mouses", "Mice", "Meese", "Mouse"],
-                answer: "Mice",
-                skill: "LL.8 Irregular plurals"
-            },
-            {
-                question: "What does the prefix 're-' mean in the word 'rewrite'?",
-                options: ["Do before", "Do again", "Not", "Too much"],
-                answer: "Do again",
-                skill: "Z.2 Prefixes and suffixes"
-            },
-            {
-                question: "Which of these words is a homophone for 'two'?",
-                options: ["Toe", "To", "Tow", "Top"],
-                answer: "To",
-                skill: "EE.2 Homophones"
-            },
-            {
-                question: "Which word is a noun in this sentence: 'The green frog jumped.'?",
-                options: ["The", "green", "frog", "jumped"],
-                answer: "frog",
-                skill: "LL.2 Identify Nouns"
-            },
-            {
-                question: "Which day is capitalised correctly?",
-                options: ["monday", "mOnday", "Monday", "monDay"],
-                answer: "Monday",
-                skill: "WW.2 Capitalisation"
-            }
+        // --- QUESTION DATABASES ---
+
+        // YEAR 2 QUESTIONS (Categories A to PP)
+        const year2Questions = [
+            { skill: "A. Consonants & vowels", question: "Which letter is a vowel?", options: ["a", "b", "c", "d"], answer: "a" },
+            { skill: "B. Syllables", question: "How many syllables are in the word 'elephant'?", options: ["1", "2", "3", "4"], answer: "3" },
+            { skill: "C. Rhyming", question: "Which word rhymes with 'cat'?", options: ["Bat", "Dog", "Sun", "Car"], answer: "Bat" },
+            { skill: "D. Blending & segmenting", question: "What word do these sounds make: s-u-n?", options: ["Sun", "Sit", "Sam", "Sad"], answer: "Sun" },
+            { skill: "E. Consonant sounds", question: "Which word starts with the same sound as 'Dog'?", options: ["Duck", "Cat", "Pig", "Bird"], answer: "Duck" },
+            { skill: "F. Consonant blends/digraphs", question: "Complete the word: __ip (a large boat).", options: ["Sh", "Ch", "Th", "Wh"], answer: "Sh" },
+            { skill: "G. Short a", question: "Which word has a short 'a' sound?", options: ["Apple", "Cake", "Rain", "Day"], answer: "Apple" },
+            { skill: "H. Short e", question: "Which word has a short 'e' sound?", options: ["Bed", "Tree", "Bee", "Me"], answer: "Bed" },
+            { skill: "I. Short i", question: "Which word has a short 'i' sound?", options: ["Pig", "Bike", "Kite", "Ice"], answer: "Pig" },
+            { skill: "J. Short o", question: "Which word has a short 'o' sound?", options: ["Dog", "Boat", "Snow", "Toe"], answer: "Dog" },
+            { skill: "K. Short u", question: "Which word has a short 'u' sound?", options: ["Sun", "Blue", "Glue", "Flute"], answer: "Sun" },
+            { skill: "L. Short vowels", question: "Identify the short vowel in the word 'cat'.", options: ["a", "e", "i", "o"], answer: "a" },
+            { skill: "M. Short & long sounds", question: "Which two words have the same vowel sound?", options: ["Cat & Bat", "Dog & Dig", "Sun & Son", "Pen & Pin"], answer: "Cat & Bat" },
+            { skill: "N. Silent e", question: "What does the silent 'e' do in 'kite'?", options: ["Makes the 'i' say its name", "Makes the 'k' silent", "Makes the 't' loud", "Nothing"], answer: "Makes the 'i' say its name" },
+            { skill: "O. Vowel digraphs", question: "Complete the word: b__t (a thing that floats).", options: ["oa", "ee", "ai", "ue"], answer: "oa" },
+            { skill: "P. Short & long patterns", question: "Which word has a LONG vowel?", options: ["Cake", "Cat", "Dog", "Pig"], answer: "Cake" },
+            { skill: "Q. Diphthongs", question: "Choose the word with an 'ou' sound.", options: ["House", "Boat", "Tree", "Play"], answer: "House" },
+            { skill: "R. Two-syllable words", question: "Put syllables together: but + ter = ?", options: ["butter", "batter", "better", "bitter"], answer: "butter" },
+            { skill: "S. Sight words", question: "Which is a correctly spelled sight word?", options: ["They", "Thay", "Thei", "Thae"], answer: "They" },
+            { skill: "T. Reality vs fiction", question: "Which could happen in real life?", options: ["A dog barking", "A dog flying", "A dog talking", "A dog driving"], answer: "A dog barking" },
+            { skill: "U. Main idea", question: "A story is about a boy finding a lost kiwi bird and taking it to a vet. What is it about?", options: ["Helping a kiwi", "Eating lunch", "Riding a bike", "Going to school"], answer: "Helping a kiwi" },
+            { skill: "V. Inference", question: "A girl is crying holding a broken toy. How does she feel?", options: ["Sad", "Happy", "Angry", "Scared"], answer: "Sad" },
+            { skill: "W. Nouns & adjectives", question: "Complete the sentence: The ___ apple.", options: ["red", "jump", "quickly", "very"], answer: "red" },
+            { skill: "X. Categories", question: "Which word does NOT belong in the group?", options: ["Apple", "Car", "Bus", "Train"], answer: "Apple" },
+            { skill: "Y. Synonyms & antonyms", question: "What is the antonym (opposite) of 'hot'?", options: ["Cold", "Warm", "Sun", "Fire"], answer: "Cold" },
+            { skill: "Z. Multiple-meaning words", question: "Which word can be a flying animal AND a cricket tool?", options: ["Bat", "Dog", "Cat", "Ball"], answer: "Bat" },
+            { skill: "AA. Shades of meaning", question: "Which word means 'very small'?", options: ["Tiny", "Big", "Huge", "Giant"], answer: "Tiny" },
+            { skill: "BB. Prefixes & suffixes", question: "What does 'un-' mean in 'unhappy'?", options: ["Not", "Very", "Again", "Before"], answer: "Not" },
+            { skill: "CC. Context clues", question: "'The giant tree reached the clouds.' What does giant mean?", options: ["Very big", "Tiny", "Green", "Old"], answer: "Very big" },
+            { skill: "DD. Reference skills", question: "Which word comes first in Alphabetical order?", options: ["Apple", "Banana", "Cat", "Dog"], answer: "Apple" },
+            { skill: "EE. Sentences", question: "Which is a question?", options: ["How are you?", "I am fine.", "Stop that!", "The cat is big."], answer: "How are you?" },
+            { skill: "FF. Nouns", question: "Which word is a noun (person, place, or thing)?", options: ["Dog", "Run", "Quickly", "Happy"], answer: "Dog" },
+            { skill: "GG. Pronouns", question: "Which word can replace 'Sarah' in a sentence?", options: ["She", "He", "It", "They"], answer: "She" },
+            { skill: "HH. Verbs", question: "Which word is an action verb?", options: ["Jump", "Red", "Happy", "Fast"], answer: "Jump" },
+            { skill: "II. Subject-verb agreement", question: "The dogs ___ running.", options: ["are", "is", "am", "was"], answer: "are" },
+            { skill: "JJ. Verb tense", question: "Which sentence happened in the PAST?", options: ["I jumped.", "I jump.", "I will jump.", "I am jumping."], answer: "I jumped." },
+            { skill: "KK. Articles", question: "I saw ___ elephant at the zoo.", options: ["an", "a", "the", "two"], answer: "an" },
+            { skill: "LL. Adjectives", question: "Which word describes how something looks?", options: ["Shiny", "Run", "Quickly", "Very"], answer: "Shiny" },
+            { skill: "MM. Prepositions", question: "The cat is hiding ___ the table.", options: ["under", "jump", "happy", "red"], answer: "under" },
+            { skill: "NN. Linking words", question: "Which word connects two ideas?", options: ["And", "Dog", "Run", "Happy"], answer: "And" },
+            { skill: "OO. Contractions", question: "What is the contraction for 'do not'?", options: ["don't", "doesnt", "do'nt", "dont'"], answer: "don't" },
+            { skill: "PP. Capitalisation", question: "Which name is written correctly with a capital letter?", options: ["Sam", "sam", "sAm", "saM"], answer: "Sam" }
         ];
 
+        // YEAR 4 QUESTIONS (Categories A to XX)
+        const year4Questions = [
+            { skill: "A. Short and long vowels", question: "Which word has a LONG 'a' sound?", options: ["Cat", "Cake", "Apple", "Map"], answer: "Cake" },
+            { skill: "B. Blends", question: "Which word starts with a three-letter blend?", options: ["Straw", "Tree", "Ship", "Play"], answer: "Straw" },
+            { skill: "C. Multisyllabic words", question: "Which word has an 'open' syllable at the end?", options: ["Tiger", "Cat", "Dog", "Pen"], answer: "Tiger" },
+            { skill: "D. Diphthongs and r vowels", question: "Which word contains an 'ou' diphthong?", options: ["Cloud", "Could", "Boat", "Cut"], answer: "Cloud" },
+            { skill: "E. Irregular words", question: "Which is the correct spelling of this common sight word?", options: ["Because", "Becuz", "Becuase", "Bekause"], answer: "Because" },
+            { skill: "F. Main idea", question: "Read: 'Apples, bananas, and kiwifruit are healthy snacks.' What is the main idea?", options: ["Fruit is healthy", "Apples are red", "Monkeys eat bananas", "Snacks are bad"], answer: "Fruit is healthy" },
+            { skill: "G. Theme", question: "In a fable where a tiny mouse saves a giant lion, what is the theme?", options: ["Even small friends can be a big help", "Mice like cheese", "Lions are loud", "Do not sleep in the forest"], answer: "Even small friends can be a big help" },
+            { skill: "H. Author's purpose", question: "Why would an author write a recipe for Anzac biscuits?", options: ["To explain how to make them", "To make you laugh", "To tell a scary story", "To sing a song"], answer: "To explain how to make them" },
+            { skill: "I. Text structure", question: "Which word shows 'cause and effect'?", options: ["Therefore", "Also", "Next", "Before"], answer: "Therefore" },
+            { skill: "J. Sensory details", question: "Which phrase appeals to your sense of HEARING?", options: ["The loud, crashing thunder", "The bright red apple", "The soft, fluffy blanket", "The sweet, sticky honey"], answer: "The loud, crashing thunder" },
+            { skill: "K. Literary devices", question: "What does this simile mean: 'As brave as a lion'?", options: ["Very courageous", "Very hungry", "Very yellow", "Very sleepy"], answer: "Very courageous" },
+            { skill: "L. Point of view", question: "Which pronoun shows a story is told in the 'First Person'?", options: ["I", "He", "She", "They"], answer: "I" },
+            { skill: "M. Inference", question: "If a character is shivering and putting on a thick jacket, what can you infer?", options: ["It is cold", "They are tired", "It is raining", "They are going swimming"], answer: "It is cold" },
+            { skill: "N. Story elements", question: "Where and when a story takes place is called the...", options: ["Setting", "Plot", "Characters", "Problem"], answer: "Setting" },
+            { skill: "O. Visual elements", question: "What can an illustration tell you about a story?", options: ["What the characters look like", "How the book smells", "The author's age", "How many pages are left"], answer: "What the characters look like" },
+            { skill: "P. Literary texts: level 1", question: "Which of these belongs in a Fantasy story?", options: ["A talking dragon", "A history lesson", "A science experiment", "A recipe for cake"], answer: "A talking dragon" },
+            { skill: "Q. Literary texts: level 2", question: "Which feature is most common in Poetry?", options: ["Rhyming words", "A table of contents", "An index", "Long paragraphs"], answer: "Rhyming words" },
+            { skill: "R. Informational texts: level 1", question: "A text titled 'How Kiwi Birds Live' is an example of...", options: ["Informational text", "A fairy tale", "A poem", "A fable"], answer: "Informational text" },
+            { skill: "S. Informational texts: level 2", question: "If you read a book about the Sky Tower in Auckland, you are reading about a...", options: ["Famous place", "Mythical creature", "Science experiment", "Recipe"], answer: "Famous place" },
+            { skill: "T. Organising writing", question: "Which sentence should come FIRST in a paragraph?", options: ["First, pour the milk.", "Finally, eat the cereal.", "Next, add the cereal.", "Then, get a spoon."], answer: "First, pour the milk." },
+            { skill: "U. Topic sentences", question: "Which is the best topic sentence for a paragraph about dogs?", options: ["Dogs make wonderful pets.", "My dog's name is Buster.", "Dogs have fur.", "I like cats too."], answer: "Dogs make wonderful pets." },
+            { skill: "V. Writer's purpose", question: "If a writer wants to convince you to wear a bike helmet, their purpose is to...", options: ["Persuade", "Entertain", "Confuse", "Frighten"], answer: "Persuade" },
+            { skill: "W. Linking words", question: "Which word is a time-order linking word?", options: ["Next", "Because", "But", "Or"], answer: "Next" },
+            { skill: "X. Opinion writing", question: "Which sentence is an OPINION?", options: ["Skateboarding is the best sport!", "A skateboard has wheels.", "You can wear a helmet.", "Skateboards roll on the ground."], answer: "Skateboarding is the best sport!" },
+            { skill: "Y. Descriptive details", question: "Which sentence uses the strongest, most descriptive verb?", options: ["The cheetah sprinted.", "The cheetah went.", "The cheetah moved.", "The cheetah was fast."], answer: "The cheetah sprinted." },
+            { skill: "Z. Prefixes and suffixes", question: "What does the suffix '-less' mean in the word 'fearless'?", options: ["Without", "Full of", "Again", "Before"], answer: "Without" },
+            { skill: "AA. Greek and Latin roots", question: "The root 'aqua' means water. What is an aquarium?", options: ["A tank for fish", "A fire engine", "A type of bird", "A space ship"], answer: "A tank for fish" },
+            { skill: "BB. Compound words", question: "Which of these is a compound word?", options: ["Sunflower", "Beautiful", "Elephant", "Running"], answer: "Sunflower" },
+            { skill: "CC. Categories", question: "Which word does NOT belong in this group: Apple, Banana, Carrot, Orange?", options: ["Carrot", "Apple", "Banana", "Orange"], answer: "Carrot" },
+            { skill: "DD. Synonyms and antonyms", question: "What is an antonym (opposite) of 'huge'?", options: ["Tiny", "Enormous", "Big", "Giant"], answer: "Tiny" },
+            { skill: "EE. Homophones", question: "Choose the correct homophone: I ___ a letter to my friend.", options: ["sent", "cent", "scent", "sents"], answer: "sent" },
+            { skill: "FF. Multiple-meaning words", question: "Which sentence uses 'bat' as a flying animal?", options: ["The bat flew out of the cave.", "He hit the ball with the bat.", "It's your turn to bat.", "My cricket bat is heavy."], answer: "The bat flew out of the cave." },
+            { skill: "GG. Shades of meaning", question: "Which word means 'VERY angry'?", options: ["Furious", "Annoyed", "Upset", "Grumpy"], answer: "Furious" },
+            { skill: "HH. Idioms", question: "What does the idiom 'raining cats and dogs' mean?", options: ["Raining heavily", "Animals are falling", "It is sunny", "It is snowing"], answer: "Raining heavily" },
+            { skill: "II. Context clues", question: "The 'massive' elephant blocked the road. What does 'massive' mean?", options: ["Very big", "Tiny", "Green", "Fast"], answer: "Very big" },
+            { skill: "JJ. Reference skills", question: "Which word comes FIRST in alphabetical order?", options: ["Kangaroo", "Koala", "Kiwi", "Kookaburra"], answer: "Kangaroo" },
+            { skill: "KK. Sentences, fragments & run-ons", question: "Which one is a complete sentence?", options: ["The cat slept.", "Running fast.", "In the house.", "The big green apple."], answer: "The cat slept." },
+            { skill: "LL. Nouns", question: "Which word is a proper noun (needs a capital letter)?", options: ["Auckland", "city", "school", "beach"], answer: "Auckland" },
+            { skill: "MM. Pronouns", question: "Replace the noun with a pronoun: 'Sarah' went to the shop.", options: ["She", "He", "They", "We"], answer: "She" },
+            { skill: "NN. Verb types", question: "Identify the action verb: 'The boy jumped on the trampoline.'", options: ["jumped", "boy", "the", "trampoline"], answer: "jumped" },
+            { skill: "OO. Subject-verb agreement", question: "Choose the correct verb: 'The dogs ___ barking.'", options: ["are", "is", "was", "am"], answer: "are" },
+            { skill: "PP. Verb tense", question: "Which sentence is in the past tense?", options: ["I walked to school.", "I walk to school.", "I will walk to school.", "I am walking."], answer: "I walked to school." },
+            { skill: "QQ. Articles", question: "Choose the correct article: I saw ___ elephant at the zoo.", options: ["an", "a", "the", "two"], answer: "an" },
+            { skill: "RR. Adjectives and adverbs", question: "Which word is an adjective? 'The shiny car drove quickly.'", options: ["shiny", "car", "drove", "quickly"], answer: "shiny" },
+            { skill: "SS. Prepositions", question: "Identify the preposition: 'The book is ON the table.'", options: ["on", "book", "is", "table"], answer: "on" },
+            { skill: "TT. Conjunctions", question: "Which word is a coordinating conjunction?", options: ["But", "Because", "Although", "Unless"], answer: "But" },
+            { skill: "UU. Contractions", question: "What is the contraction for 'do not'?", options: ["don't", "doesnt", "do'nt", "dont'"], answer: "don't" },
+            { skill: "VV. Commas", question: "Where does the comma go? 'Yes I would like some kiwi fruit.'", options: ["Yes, I would...", "Yes I, would...", "Yes I would, like...", "Yes I would like, some..."], answer: "Yes, I would..." },
+            { skill: "WW. Capitalisation", question: "Which of these is capitalised correctly?", options: ["Mount Cook", "mount cook", "Mount cook", "mount Cook"], answer: "Mount Cook" },
+            { skill: "XX. Formatting", question: "Which is the correct way to format a book title?", options: ["The Hobbit", "the hobbit", "The hobbit", "the Hobbit"], answer: "The Hobbit" }
+        ];
+
+        // GAME LOGIC VARIABLES
+        let currentQuestionList = [];
         let currentQuestionIndex = 0;
         let score = 0;
+        let isAnswering = false;
 
+        const setupMenu = document.getElementById("setup-menu");
+        const gamePlayArea = document.getElementById("game-play-area");
         const questionBox = document.getElementById("question-box");
         const optionsBox = document.getElementById("options");
         const feedbackBox = document.getElementById("feedback");
         const scoreBox = document.getElementById("score");
         const restartBtn = document.getElementById("restart-btn");
-        const gameArea = document.getElementById("game-area");
         const skillTag = document.getElementById("skill-tag");
+        const questionCounter = document.getElementById("question-counter");
+        const progressBar = document.getElementById("progress-bar");
 
-        function startGame() {
+        function shuffle(array) {
+            let shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initializeGame() {
+            // Get user choices
+            const yearSelection = document.getElementById("year-select").value;
+            const lengthSelection = document.getElementById("length-select").value;
+
+            // Pick database based on Year Level
+            let database = (yearSelection === "2") ? year2Questions : year4Questions;
+
+            // Shuffle the database so questions are random
+            let randomizedDB = shuffle(database);
+
+            // Slice array based on length selection
+            if (lengthSelection === "all") {
+                currentQuestionList = randomizedDB;
+            } else {
+                let numQuestions = parseInt(lengthSelection);
+                currentQuestionList = randomizedDB.slice(0, numQuestions);
+            }
+
+            // Reset scores & counters
             currentQuestionIndex = 0;
             score = 0;
             scoreBox.innerText = score;
+
+            // Swap UI from Menu to Game
+            setupMenu.style.display = "none";
             restartBtn.style.display = "none";
-            gameArea.style.display = "block";
-            feedbackBox.innerText = "";
+            gamePlayArea.style.display = "block";
+            skillTag.style.display = "inline-block";
+            
             showQuestion();
         }
 
         function showQuestion() {
+            isAnswering = false;
             feedbackBox.innerText = "";
             
             // End of game
-            if (currentQuestionIndex >= questions.length) {
-                questionBox.innerHTML = "🎉 Awesome job! You finished the adventure! 🎉";
+            if (currentQuestionIndex >= currentQuestionList.length) {
+                questionBox.innerHTML = `🎉 Amazing! You finished your adventure with a score of ${score}! 🎉`;
                 optionsBox.innerHTML = "";
-                skillTag.innerText = "";
+                skillTag.style.display = "none";
+                questionCounter.innerText = "Complete!";
+                progressBar.style.width = "100%";
                 restartBtn.style.display = "inline-block";
                 return;
             }
 
-            const currentQuestion = questions[currentQuestionIndex];
+            const currentQuestion = currentQuestionList[currentQuestionIndex];
+            
+            // Update Progress Bar
+            questionCounter.innerText = `Question: ${currentQuestionIndex + 1} / ${currentQuestionList.length}`;
+            let progressPercentage = (currentQuestionIndex / currentQuestionList.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            
+            // Display Question Data
+            skillTag.innerText = "Category: " + currentQuestion.skill;
             questionBox.innerText = currentQuestion.question;
-            skillTag.innerText = "Practising: " + currentQuestion.skill;
             
             optionsBox.innerHTML = "";
             
-            currentQuestion.options.forEach(option => {
+            // Shuffle the 4 answer options
+            let shuffledOptions = shuffle(currentQuestion.options);
+            
+            shuffledOptions.forEach(option => {
                 const button = document.createElement("button");
                 button.innerText = option;
                 button.classList.add("btn");
-                button.onclick = () => selectAnswer(option, currentQuestion.answer);
+                button.onclick = () => selectAnswer(option, currentQuestion.answer, button);
                 optionsBox.appendChild(button);
             });
         }
 
-        function selectAnswer(selected, correct) {
+        function selectAnswer(selected, correct, buttonElement) {
+            if (isAnswering) return; 
+            isAnswering = true;
+
+            const buttons = document.querySelectorAll('.btn');
+            
             if (selected === correct) {
                 feedbackBox.innerText = "🌟 Correct! Great job!";
                 feedbackBox.className = "correct";
+                buttonElement.style.backgroundColor = "#2ED573"; 
+                buttonElement.style.color = "white";
                 score += 10;
                 scoreBox.innerText = score;
             } else {
                 feedbackBox.innerText = "Oops! The correct answer was: " + correct;
                 feedbackBox.className = "wrong";
+                buttonElement.style.backgroundColor = "#FF4757"; 
+                buttonElement.style.color = "white";
+                
+                // Highlight the correct one
+                buttons.forEach(btn => {
+                    if(btn.innerText === correct) {
+                        btn.style.backgroundColor = "#2ED573";
+                        btn.style.color = "white";
+                    }
+                });
             }
 
-            // Wait 2 seconds before showing the next question
+            // Move to next question after 2 seconds
             setTimeout(() => {
                 currentQuestionIndex++;
                 showQuestion();
             }, 2000);
         }
 
-        // Start the game when the page loads
-        startGame();
+        function backToMenu() {
+            gamePlayArea.style.display = "none";
+            restartBtn.style.display = "none";
+            setupMenu.style.display = "block";
+        }
     </script>
 </body>
 </html>
