@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&family=Poppins:wght@600&display=swap');
 
-        /* --- DYNAMIC THEME VARIABLES --- */
         :root {
             --bg-color: #87CEEB; 
             --bg-gradient: linear-gradient(135deg, #87CEEB, #f5f6fa);
@@ -21,7 +20,6 @@
             --skill-bg: #dfe4ea;
         }
 
-        /* CLARIZA'S THEME */
         body.clariza-theme {
             --bg-color: #ff9a9e;
             --bg-gradient: linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%);
@@ -34,7 +32,6 @@
             --skill-bg: #ffe4e1;
         }
 
-        /* JACE'S THEME */
         body.jace-theme {
             --bg-color: #0f2027;
             --bg-gradient: linear-gradient(to right, #0f2027, #203a43, #2c5364);
@@ -73,181 +70,43 @@
             transition: all 0.5s ease;
         }
 
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--title-color);
-            margin-top: 0;
-            font-size: 2.2rem;
-            transition: color 0.5s ease;
-        }
-
+        h1 { font-family: 'Fredoka One', cursive; color: var(--title-color); margin-top: 0; font-size: 2.2rem; }
+        
         #setup-menu { display: block; }
 
-        .character-select-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .char-card {
-            background-color: white;
-            border: 4px solid #dfe4ea;
-            border-radius: 20px;
-            padding: 15px;
-            width: 45%;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        }
-
+        .character-select-container { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; }
+        .char-card { background-color: white; border: 4px solid #dfe4ea; border-radius: 20px; padding: 15px; width: 45%; cursor: pointer; transition: transform 0.2s; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
         .char-card:hover { transform: translateY(-5px); }
         .char-card.selected-clariza { border-color: #ff69b4; background-color: #fff0f5; }
         .char-card.selected-jace { border-color: #f0932b; background-color: #fceaea; }
-
         .char-icon { font-size: 3rem; margin-bottom: 5px; }
         .char-name { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: #2f3542; margin: 0; }
         .char-year { font-weight: bold; color: #747d8c; margin: 5px 0; }
         .char-likes { font-size: 0.9rem; color: #57606f; }
 
-        .menu-section {
-            margin-bottom: 25px;
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 15px;
-            border-radius: 15px;
-        }
-
-        select {
-            font-size: 1.2rem;
-            font-family: 'Nunito', sans-serif;
-            padding: 10px;
-            border-radius: 10px;
-            border: 2px solid #a4b0be;
-            width: 80%;
-            max-width: 300px;
-            font-weight: bold;
-            color: #2f3542;
-        }
-
-        #start-btn, #restart-btn {
-            background-color: #2ED573;
-            color: white;
-            border: none;
-            border-radius: 15px;
-            padding: 15px 40px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: 'Fredoka One', cursive;
-            transition: transform 0.2s;
-            margin-top: 10px;
-            box-shadow: 0 5px 0 #219a52;
-        }
-
-        #start-btn:hover, #restart-btn:hover {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #219a52;
-        }
-
+        .menu-section { margin-bottom: 25px; background-color: rgba(255, 255, 255, 0.5); padding: 15px; border-radius: 15px; }
+        select { font-size: 1.2rem; font-family: 'Nunito', sans-serif; padding: 10px; border-radius: 10px; border: 2px solid #a4b0be; width: 80%; max-width: 300px; font-weight: bold; }
+        
+        #start-btn, #restart-btn { background-color: #2ED573; color: white; border: none; border-radius: 15px; padding: 15px 40px; font-size: 1.5rem; cursor: pointer; font-weight: bold; font-family: 'Fredoka One', cursive; margin-top: 10px; box-shadow: 0 5px 0 #219a52; }
+        #start-btn:hover, #restart-btn:hover { transform: translateY(3px); box-shadow: 0 2px 0 #219a52; }
         #restart-btn { display: none; background-color: #FF6B6B; box-shadow: 0 5px 0 #c0392b; }
-        #restart-btn:hover { box-shadow: 0 2px 0 #c0392b; }
 
         #game-play-area { display: none; }
+        .stats-bar { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; color: var(--text-color); margin-bottom: 15px; }
+        #progress-container { width: 100%; background-color: #dfe4ea; border-radius: 10px; height: 15px; margin-bottom: 25px; overflow: hidden; }
+        #progress-bar { height: 100%; background-color: var(--progress-bg); width: 0%; transition: width 0.4s ease; }
 
-        .stats-bar {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-color);
-            margin-bottom: 15px;
-        }
-
-        #progress-container {
-            width: 100%;
-            background-color: #dfe4ea;
-            border-radius: 10px;
-            height: 15px;
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-
-        #progress-bar {
-            height: 100%;
-            background-color: var(--progress-bg);
-            width: 0%;
-            transition: width 0.4s ease, background-color 0.5s ease;
-        }
-
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .skill-tag {
-            font-size: 0.85rem;
-            background-color: var(--skill-bg);
-            color: var(--text-color);
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        #audio-btn {
-            background-color: #f1c40f;
-            border: none;
-            border-radius: 10px;
-            padding: 8px 15px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-            color: #2c3e50;
-            cursor: pointer;
-            box-shadow: 0 3px 0 #f39c12;
-            transition: transform 0.1s;
-        }
-
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .skill-tag { font-size: 0.85rem; background-color: var(--skill-bg); color: var(--text-color); padding: 5px 15px; border-radius: 15px; font-weight: bold; }
+        #audio-btn { background-color: #f1c40f; border: none; border-radius: 10px; padding: 8px 15px; font-size: 1rem; font-family: 'Poppins', sans-serif; font-weight: bold; color: #2c3e50; cursor: pointer; box-shadow: 0 3px 0 #f39c12; }
         #audio-btn:active { transform: translateY(3px); box-shadow: none; }
 
-        #question-box {
-            font-size: 1.6rem;
-            color: var(--text-color);
-            margin-bottom: 25px;
-            min-height: 70px;
-            font-weight: 700;
-        }
-
-        .btn-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .btn {
-            background-color: var(--btn-bg);
-            border: 3px solid var(--btn-border);
-            border-radius: 15px;
-            padding: 15px;
-            font-size: 1.2rem;
-            font-family: 'Nunito', sans-serif;
-            font-weight: bold;
-            color: var(--text-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
+        #question-box { font-size: 1.6rem; color: var(--text-color); margin-bottom: 25px; min-height: 70px; font-weight: 700; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn { background-color: var(--btn-bg); border: 3px solid var(--btn-border); border-radius: 15px; padding: 15px; font-size: 1.2rem; font-family: 'Nunito', sans-serif; font-weight: bold; color: var(--text-color); cursor: pointer; transition: all 0.2s ease; }
         .btn:hover { background-color: var(--btn-hover); transform: scale(1.03); }
 
-        #feedback {
-            margin-top: 20px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            min-height: 35px;
-        }
-
+        #feedback { margin-top: 20px; font-size: 1.4rem; font-weight: bold; min-height: 35px; }
         .correct { color: #2ED573; }
         .wrong { color: #FF4757; }
     </style>
@@ -268,7 +127,6 @@
                         <p class="char-year">Year 2 English</p>
                         <div class="char-likes">🌈 Rainbows & Cupcakes 🧁</div>
                     </div>
-                    
                     <div class="char-card" id="card-jace" onclick="selectCharacter('jace')">
                         <div class="char-icon">🦖</div>
                         <h4 class="char-name">Jace</h4>
@@ -277,7 +135,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="menu-section">
                 <h3>How many questions?</h3>
                 <select id="length-select">
@@ -286,7 +143,6 @@
                     <option value="all">All Topics (Challenge!)</option>
                 </select>
             </div>
-
             <button id="start-btn" onclick="initializeGame()">Start Game!</button>
         </div>
         
@@ -296,10 +152,7 @@
                 <span id="question-counter">Question: 1 / 10</span>
                 <span>Score: <span id="score">0</span></span>
             </div>
-
-            <div id="progress-container">
-                <div id="progress-bar"></div>
-            </div>
+            <div id="progress-container"><div id="progress-bar"></div></div>
             
             <div class="question-header">
                 <div class="skill-tag" id="skill-tag">Skill: Loading...</div>
@@ -310,104 +163,502 @@
             <div class="btn-grid" id="options"></div>
             <div id="feedback"></div>
         </div>
-
         <button id="restart-btn" onclick="backToMenu()">Back to Menu</button>
     </div>
 
     <script>
-        // --- MULTI-QUESTION DATABASES ---
-        // I have added 2 to 3 completely different questions for each topic!
+        // --- MASSIVE DATA COMPRESSION ARRAYS ---
+        // Format: [Skill Name, Question, [Options], Correct Answer]
+        
+        const rawY2 = [
+            // A. Consonants & vowels (10)
+            ["A. Consonants & vowels", "Which letter is a vowel?", ["a", "b", "c", "d"], "a"],
+            ["A. Consonants & vowels", "Which letter is a vowel?", ["e", "f", "g", "h"], "e"],
+            ["A. Consonants & vowels", "Which letter is a vowel?", ["z", "x", "i", "w"], "i"],
+            ["A. Consonants & vowels", "Which letter is a vowel?", ["o", "p", "q", "r"], "o"],
+            ["A. Consonants & vowels", "Which letter is a vowel?", ["s", "t", "u", "v"], "u"],
+            ["A. Consonants & vowels", "Which letter is a consonant?", ["a", "e", "i", "m"], "m"],
+            ["A. Consonants & vowels", "Which letter is a consonant?", ["b", "o", "u", "a"], "b"],
+            ["A. Consonants & vowels", "Find the vowel in 'cat'.", ["c", "a", "t", "s"], "a"],
+            ["A. Consonants & vowels", "Find the vowel in 'pig'.", ["p", "g", "i", "s"], "i"],
+            ["A. Consonants & vowels", "Find the consonant in 'egg'.", ["e", "g", "a", "o"], "g"],
+            
+            // B. Syllables (10)
+            ["B. Syllables", "How many syllables in 'elephant'?", ["1", "2", "3", "4"], "3"],
+            ["B. Syllables", "How many syllables in 'dog'?", ["1", "2", "3", "4"], "1"],
+            ["B. Syllables", "How many syllables in 'apple'?", ["1", "2", "3", "4"], "2"],
+            ["B. Syllables", "How many syllables in 'banana'?", ["1", "2", "3", "4"], "3"],
+            ["B. Syllables", "How many syllables in 'computer'?", ["1", "2", "3", "4"], "3"],
+            ["B. Syllables", "How many syllables in 'cat'?", ["1", "2", "3", "4"], "1"],
+            ["B. Syllables", "How many syllables in 'helicopter'?", ["1", "2", "3", "4"], "4"],
+            ["B. Syllables", "How many syllables in 'table'?", ["1", "2", "3", "4"], "2"],
+            ["B. Syllables", "How many syllables in 'sun'?", ["1", "2", "3", "4"], "1"],
+            ["B. Syllables", "How many syllables in 'umbrella'?", ["1", "2", "3", "4"], "3"],
 
-        const year2Questions = [
+            // C. Rhyming (10)
+            ["C. Rhyming", "Which word rhymes with 'cat'?", ["Bat", "Dog", "Sun", "Car"], "Bat"],
+            ["C. Rhyming", "Which word rhymes with 'tree'?", ["Bee", "Cow", "House", "Leaf"], "Bee"],
+            ["C. Rhyming", "Which word rhymes with 'sun'?", ["Run", "Boy", "Star", "Cloud"], "Run"],
+            ["C. Rhyming", "Which word rhymes with 'log'?", ["Dog", "Pig", "Cat", "Tree"], "Dog"],
+            ["C. Rhyming", "Which word rhymes with 'pig'?", ["Wig", "Bug", "Pen", "Mud"], "Wig"],
+            ["C. Rhyming", "Which word rhymes with 'car'?", ["Star", "Bus", "Road", "Wheel"], "Star"],
+            ["C. Rhyming", "Which word rhymes with 'house'?", ["Mouse", "Horse", "Roof", "Door"], "Mouse"],
+            ["C. Rhyming", "Which word rhymes with 'look'?", ["Book", "See", "Eye", "Watch"], "Book"],
+            ["C. Rhyming", "Which word rhymes with 'boat'?", ["Goat", "Ship", "Water", "Float"], "Goat"],
+            ["C. Rhyming", "Which word rhymes with 'duck'?", ["Truck", "Bird", "Quack", "Pond"], "Truck"],
+
+            // Y. Synonyms & Antonyms (10)
+            ["Y. Synonyms & Antonyms", "What is the opposite of 'hot'?", ["Cold", "Warm", "Sun", "Fire"], "Cold"],
+            ["Y. Synonyms & Antonyms", "What is the opposite of 'big'?", ["Small", "Large", "Giant", "Huge"], "Small"],
+            ["Y. Synonyms & Antonyms", "What is the opposite of 'happy'?", ["Sad", "Glad", "Joyful", "Fun"], "Sad"],
+            ["Y. Synonyms & Antonyms", "What is the opposite of 'fast'?", ["Slow", "Quick", "Run", "Speed"], "Slow"],
+            ["Y. Synonyms & Antonyms", "What is the opposite of 'day'?", ["Night", "Morning", "Sun", "Light"], "Night"],
+            ["Y. Synonyms & Antonyms", "What is a synonym (same) for 'big'?", ["Large", "Tiny", "Small", "Short"], "Large"],
+            ["Y. Synonyms & Antonyms", "What is a synonym for 'quick'?", ["Fast", "Slow", "Turtle", "Stop"], "Fast"],
+            ["Y. Synonyms & Antonyms", "What is a synonym for 'happy'?", ["Glad", "Sad", "Mad", "Angry"], "Glad"],
+            ["Y. Synonyms & Antonyms", "What is a synonym for 'small'?", ["Tiny", "Huge", "Giant", "Tall"], "Tiny"],
+            ["Y. Synonyms & Antonyms", "What is a synonym for 'smart'?", ["Clever", "Silly", "Funny", "Slow"], "Clever"],
+
+            // EE. Sentences (10)
+            ["EE. Sentences", "Which is a question?", ["How are you?", "I am fine.", "Stop that!", "The cat is big."], "How are you?"],
+            ["EE. Sentences", "Which is a question?", ["Where is the dog?", "The dog ran.", "Good dog!", "I like dogs."], "Where is the dog?"],
+            ["EE. Sentences", "Which is a question?", ["What time is it?", "It is noon.", "Go to bed.", "The clock is red."], "What time is it?"],
+            ["EE. Sentences", "Which is an exclamation?", ["Watch out!", "I see a bird.", "Is that a bird?", "The bird flew."], "Watch out!"],
+            ["EE. Sentences", "Which is an exclamation?", ["Happy birthday!", "My name is Sam.", "How old are you?", "I am six."], "Happy birthday!"],
+            ["EE. Sentences", "Which is a command?", ["Stop running.", "Are you running?", "I like to run.", "He ran fast."], "Stop running."],
+            ["EE. Sentences", "Which is a command?", ["Sit down.", "The chair is soft.", "Can I sit?", "I sat."], "Sit down."],
+            ["EE. Sentences", "Which is a statement?", ["The sky is blue.", "Look out!", "Why is it blue?", "Jump up!"], "The sky is blue."],
+            ["EE. Sentences", "Which is a statement?", ["I have a cat.", "Do you have a cat?", "Catch it!", "Wow!"], "I have a cat."],
+            ["EE. Sentences", "Which sentence needs a question mark?", ["Who is that", "I see him", "That is Bob", "Bob is tall"], "Who is that"],
+
+            // FF. Nouns (10)
+            ["FF. Nouns", "Which word is a noun (person, place, thing)?", ["Dog", "Run", "Quickly", "Happy"], "Dog"],
+            ["FF. Nouns", "Which word is a noun?", ["School", "Jump", "Blue", "Very"], "School"],
+            ["FF. Nouns", "Which word is a noun?", ["Teacher", "Teach", "Loudly", "Fast"], "Teacher"],
+            ["FF. Nouns", "Which noun is a PERSON?", ["Doctor", "Hospital", "Bed", "Medicine"], "Doctor"],
+            ["FF. Nouns", "Which noun is a PLACE?", ["Park", "Boy", "Ball", "Tree"], "Park"],
+            ["FF. Nouns", "Which noun is a THING?", ["Pencil", "Write", "Girl", "School"], "Pencil"],
+            ["FF. Nouns", "Which noun is an ANIMAL?", ["Tiger", "Jungle", "Roar", "Fierce"], "Tiger"],
+            ["FF. Nouns", "What is the plural of 'cat'?", ["Cats", "Cates", "Catties", "Cat"], "Cats"],
+            ["FF. Nouns", "What is the plural of 'dog'?", ["Dogs", "Doges", "Doggies", "Dog"], "Dogs"],
+            ["FF. Nouns", "What is the plural of 'box'?", ["Boxes", "Boxs", "Box", "Boxies"], "Boxes"],
+
+            // HH. Verbs (10)
+            ["HH. Verbs", "Which word is an action verb?", ["Jump", "Red", "Happy", "Fast"], "Jump"],
+            ["HH. Verbs", "Which word is a verb?", ["Run", "Apple", "Cat", "Tall"], "Run"],
+            ["HH. Verbs", "Which word is a verb?", ["Swim", "Pool", "Water", "Wet"], "Swim"],
+            ["HH. Verbs", "Which word is a verb?", ["Read", "Book", "Page", "Words"], "Read"],
+            ["HH. Verbs", "Which word is a verb?", ["Eat", "Food", "Plate", "Yummy"], "Eat"],
+            ["HH. Verbs", "Find the verb: 'The boy plays.'", ["plays", "The", "boy", "none"], "plays"],
+            ["HH. Verbs", "Find the verb: 'She sings a song.'", ["sings", "She", "song", "a"], "sings"],
+            ["HH. Verbs", "Find the verb: 'We walk to school.'", ["walk", "We", "to", "school"], "walk"],
+            ["HH. Verbs", "Find the verb: 'The bird flies.'", ["flies", "The", "bird", "sky"], "flies"],
+            ["HH. Verbs", "Find the verb: 'He sleeps in bed.'", ["sleeps", "He", "in", "bed"], "sleeps"],
+
+            // KK. Articles (10)
+            ["KK. Articles", "I saw ___ elephant at the zoo.", ["an", "a", "the", "two"], "an"],
+            ["KK. Articles", "I want to eat ___ apple.", ["an", "a", "the", "some"], "an"],
+            ["KK. Articles", "It is raining, I need ___ umbrella.", ["an", "a", "the", "my"], "an"],
+            ["KK. Articles", "I saw ___ owl in the tree.", ["an", "a", "the", "one"], "an"],
+            ["KK. Articles", "Eskimos build ___ igloo.", ["an", "a", "the", "snow"], "an"],
+            ["KK. Articles", "I have ___ pet dog.", ["a", "an", "the", "two"], "a"],
+            ["KK. Articles", "We drove in ___ car.", ["a", "an", "the", "some"], "a"],
+            ["KK. Articles", "She read ___ book.", ["a", "an", "the", "many"], "a"],
+            ["KK. Articles", "The bird sat in ___ tree.", ["a", "an", "the", "leaf"], "a"],
+            ["KK. Articles", "He gave me ___ present.", ["a", "an", "the", "box"], "a"],
+
+            // V. Inference (10)
+            ["V. Inference", "A girl is crying with a broken toy. How does she feel?", ["Sad", "Happy", "Angry", "Scared"], "Sad"],
+            ["V. Inference", "A boy is jumping up and down smiling. How does he feel?", ["Happy", "Sad", "Tired", "Cold"], "Happy"],
+            ["V. Inference", "Someone is shivering in the snow. How do they feel?", ["Cold", "Hot", "Angry", "Thirsty"], "Cold"],
+            ["V. Inference", "A dog is hiding under the bed during a storm. How does it feel?", ["Scared", "Happy", "Hungry", "Brave"], "Scared"],
+            ["V. Inference", "A girl is yawning and rubbing her eyes. How does she feel?", ["Sleepy", "Hungry", "Excited", "Fast"], "Sleepy"],
+            ["V. Inference", "A boy is holding his tummy looking at a cake. How does he feel?", ["Hungry", "Tired", "Cold", "Angry"], "Hungry"],
+            ["V. Inference", "She got an A+ on her spelling test. How does she feel?", ["Proud", "Sad", "Scared", "Mad"], "Proud"],
+            ["V. Inference", "His ice cream fell on the dirt. How does he feel?", ["Upset", "Joyful", "Tired", "Warm"], "Upset"],
+            ["V. Inference", "She is drinking three glasses of water. How does she feel?", ["Thirsty", "Cold", "Sleepy", "Sad"], "Thirsty"],
+            ["V. Inference", "He is stomping his feet and yelling. How does he feel?", ["Angry", "Happy", "Sleepy", "Proud"], "Angry"],
+
+            // M. Short & long sounds (10)
+            ["M. Short & long sounds", "Which word has a LONG 'a' sound?", ["Cake", "Cat", "Bat", "Hat"], "Cake"],
+            ["M. Short & long sounds", "Which word has a LONG 'e' sound?", ["Tree", "Bed", "Red", "Pen"], "Tree"],
+            ["M. Short & long sounds", "Which word has a LONG 'i' sound?", ["Kite", "Pig", "Sit", "Dig"], "Kite"],
+            ["M. Short & long sounds", "Which word has a LONG 'o' sound?", ["Boat", "Dog", "Log", "Frog"], "Boat"],
+            ["M. Short & long sounds", "Which word has a LONG 'u' sound?", ["Flute", "Sun", "Run", "Bug"], "Flute"],
+            ["M. Short & long sounds", "Which word has a SHORT 'a' sound?", ["Cat", "Cake", "Rain", "Play"], "Cat"],
+            ["M. Short & long sounds", "Which word has a SHORT 'e' sound?", ["Bed", "Tree", "Bee", "See"], "Bed"],
+            ["M. Short & long sounds", "Which word has a SHORT 'i' sound?", ["Pig", "Kite", "Ice", "Bike"], "Pig"],
+            ["M. Short & long sounds", "Which word has a SHORT 'o' sound?", ["Dog", "Boat", "Snow", "Toe"], "Dog"],
+            ["M. Short & long sounds", "Which word has a SHORT 'u' sound?", ["Sun", "Flute", "Blue", "Glue"], "Sun"]
+
+                        // --- NEW YEAR 2 EXPANSION PACK ---
             // A. Consonants & vowels
-            { skill: "A. Consonants & vowels", question: "Which letter is a vowel?", options: ["a", "b", "c", "d"], answer: "a" },
-            { skill: "A. Consonants & vowels", question: "Which letter is a consonant?", options: ["m", "e", "o", "i"], answer: "m" },
-            { skill: "A. Consonants & vowels", question: "Find the vowel in the word 'cat'.", options: ["c", "a", "t", "s"], answer: "a" },
+            ["A. Consonants & vowels", "Find the vowel in 'sun'.", ["u", "s", "n", "t"], "u"],
+            ["A. Consonants & vowels", "Find the vowel in 'web'.", ["e", "w", "b", "c"], "e"],
+            ["A. Consonants & vowels", "Find the vowel in 'fish'.", ["i", "f", "s", "h"], "i"],
+            ["A. Consonants & vowels", "Find the vowel in 'fox'.", ["o", "f", "x", "z"], "o"],
+            ["A. Consonants & vowels", "Which letter is a consonant?", ["p", "a", "e", "o"], "p"],
+            ["A. Consonants & vowels", "Which letter is a consonant?", ["t", "u", "i", "a"], "t"],
+            ["A. Consonants & vowels", "Find the consonant in 'ice'.", ["c", "i", "e", "a"], "c"],
+            ["A. Consonants & vowels", "Find the consonant in 'ape'.", ["p", "a", "e", "o"], "p"],
+            ["A. Consonants & vowels", "Which word starts with a vowel?", ["Apple", "Bat", "Cat", "Dog"], "Apple"],
+            ["A. Consonants & vowels", "Which word starts with a consonant?", ["Frog", "Ice", "Owl", "Ant"], "Frog"],
+
             // B. Syllables
-            { skill: "B. Syllables", question: "How many syllables are in the word 'elephant'?", options: ["1", "2", "3", "4"], answer: "3" },
-            { skill: "B. Syllables", question: "How many syllables are in 'dog'?", options: ["1", "2", "3", "4"], answer: "1" },
+            ["B. Syllables", "How many syllables in 'butterfly'?", ["1", "2", "3", "4"], "3"],
+            ["B. Syllables", "How many syllables in 'car'?", ["1", "2", "3", "4"], "1"],
+            ["B. Syllables", "How many syllables in 'pizza'?", ["1", "2", "3", "4"], "2"],
+            ["B. Syllables", "How many syllables in 'watermelon'?", ["1", "2", "3", "4"], "4"],
+            ["B. Syllables", "How many syllables in 'robot'?", ["1", "2", "3", "4"], "2"],
+            ["B. Syllables", "How many syllables in 'dinosaur'?", ["1", "2", "3", "4"], "3"],
+            ["B. Syllables", "How many syllables in 'bed'?", ["1", "2", "3", "4"], "1"],
+            ["B. Syllables", "How many syllables in 'family'?", ["1", "2", "3", "4"], "3"],
+            ["B. Syllables", "How many syllables in 'pencil'?", ["1", "2", "3", "4"], "2"],
+            ["B. Syllables", "How many syllables in 'book'?", ["1", "2", "3", "4"], "1"],
+
             // C. Rhyming
-            { skill: "C. Rhyming", question: "Which word rhymes with 'cat'?", options: ["Bat", "Dog", "Sun", "Car"], answer: "Bat" },
-            { skill: "C. Rhyming", question: "Which word rhymes with 'tree'?", options: ["Bee", "Cow", "House", "Leaf"], answer: "Bee" },
-            // D. Blending & segmenting
-            { skill: "D. Blending & segmenting", question: "What word do these sounds make: s-u-n?", options: ["Sun", "Sit", "Sam", "Sad"], answer: "Sun" },
-            { skill: "D. Blending & segmenting", question: "What word do these sounds make: f-r-o-g?", options: ["Frog", "Fig", "Flag", "Fish"], answer: "Frog" },
-            // E. Consonant sounds
-            { skill: "E. Consonant sounds", question: "Which word starts with the same sound as 'Dog'?", options: ["Duck", "Cat", "Pig", "Bird"], answer: "Duck" },
-            { skill: "E. Consonant sounds", question: "Which word ends with the same sound as 'Bat'?", options: ["Cat", "Dog", "Car", "Bus"], answer: "Cat" },
-            // F. Consonant blends/digraphs
-            { skill: "F. Consonant blends/digraphs", question: "Complete the word: __ip (a large boat).", options: ["Sh", "Ch", "Th", "Wh"], answer: "Sh" },
-            { skill: "F. Consonant blends/digraphs", question: "Complete the word: __ee (a plant with leaves).", options: ["Tr", "Fl", "Sp", "Br"], answer: "Tr" },
-            // G-K. Short Vowels
-            { skill: "G. Short a", question: "Which word has a short 'a' sound?", options: ["Apple", "Cake", "Rain", "Day"], answer: "Apple" },
-            { skill: "H. Short e", question: "Which word has a short 'e' sound?", options: ["Bed", "Tree", "Bee", "Me"], answer: "Bed" },
-            { skill: "I. Short i", question: "Which word has a short 'i' sound?", options: ["Pig", "Bike", "Kite", "Ice"], answer: "Pig" },
-            { skill: "J. Short o", question: "Which word has a short 'o' sound?", options: ["Dog", "Boat", "Snow", "Toe"], answer: "Dog" },
-            { skill: "K. Short u", question: "Which word has a short 'u' sound?", options: ["Sun", "Blue", "Glue", "Flute"], answer: "Sun" },
-            // M. Short & long sounds
-            { skill: "M. Short & long sounds", question: "Which two words have the SAME vowel sound?", options: ["Cat & Bat", "Dog & Dig", "Sun & Son", "Pen & Pin"], answer: "Cat & Bat" },
-            { skill: "M. Short & long sounds", question: "Which word has a LONG vowel sound?", options: ["Cake", "Cat", "Pig", "Sun"], answer: "Cake" },
-            // N. Silent e
-            { skill: "N. Silent e", question: "What does the silent 'e' do in 'kite'?", options: ["Makes the 'i' say its name", "Makes the 'k' silent", "Makes the 't' loud", "Nothing"], answer: "Makes the 'i' say its name" },
-            { skill: "N. Silent e", question: "Choose the word with a silent e.", options: ["Cake", "Cat", "Dog", "Run"], answer: "Cake" },
-            // O. Vowel digraphs
-            { skill: "O. Vowel digraphs", question: "Complete the word: b__t (a thing that floats).", options: ["oa", "ee", "ai", "ue"], answer: "oa" },
-            { skill: "O. Vowel digraphs", question: "Complete the word: tr__ (it has leaves).", options: ["ee", "oa", "ai", "ou"], answer: "ee" },
-            // S. Sight words
-            { skill: "S. Sight words", question: "Which is a correctly spelled sight word?", options: ["They", "Thay", "Thei", "Thae"], answer: "They" },
-            { skill: "S. Sight words", question: "Which is a correctly spelled sight word?", options: ["Because", "Becuz", "Becuase", "Bekause"], answer: "Because" },
-            // T. Reality vs fiction
-            { skill: "T. Reality vs fiction", question: "Which could happen in real life?", options: ["A dog barking", "A dog flying", "A dog talking", "A dog driving"], answer: "A dog barking" },
-            { skill: "T. Reality vs fiction", question: "Which is FICTION (make-believe)?", options: ["A talking unicorn", "A sleeping cat", "A red car", "A tall tree"], answer: "A talking unicorn" },
-            // V. Inference
-            { skill: "V. Inference", question: "A girl is crying holding a broken toy. How does she feel?", options: ["Sad", "Happy", "Angry", "Scared"], answer: "Sad" },
-            { skill: "V. Inference", question: "A boy is jumping up and down smiling. How does he feel?", options: ["Happy", "Sad", "Tired", "Cold"], answer: "Happy" },
-            // Y. Synonyms & antonyms
-            { skill: "Y. Synonyms & antonyms", question: "What is the antonym (opposite) of 'hot'?", options: ["Cold", "Warm", "Sun", "Fire"], answer: "Cold" },
-            { skill: "Y. Synonyms & antonyms", question: "What is a synonym (same) for 'big'?", options: ["Large", "Small", "Tiny", "Fast"], answer: "Large" },
+            ["C. Rhyming", "Which word rhymes with 'pen'?", ["Hen", "Pig", "Cow", "Dog"], "Hen"],
+            ["C. Rhyming", "Which word rhymes with 'bug'?", ["Rug", "Bag", "Big", "Bog"], "Rug"],
+            ["C. Rhyming", "Which word rhymes with 'hat'?", ["Bat", "Hot", "Hit", "Hut"], "Bat"],
+            ["C. Rhyming", "Which word rhymes with 'tall'?", ["Ball", "Tell", "Till", "Tool"], "Ball"],
+            ["C. Rhyming", "Which word rhymes with 'red'?", ["Bed", "Rod", "Rid", "Rad"], "Bed"],
+            ["C. Rhyming", "Which word rhymes with 'fox'?", ["Box", "Fix", "Fax", "Mix"], "Box"],
+            ["C. Rhyming", "Which word rhymes with 'play'?", ["Day", "Plan", "Plum", "Boy"], "Day"],
+            ["C. Rhyming", "Which word rhymes with 'ring'?", ["Sing", "Rang", "Rung", "Wrong"], "Sing"],
+            ["C. Rhyming", "Which word rhymes with 'light'?", ["Night", "Late", "Let", "Lot"], "Night"],
+            ["C. Rhyming", "Which word rhymes with 'moon'?", ["Spoon", "Man", "Men", "Mine"], "Spoon"],
+
+            // Y. Synonyms & Antonyms
+            ["Y. Synonyms & Antonyms", "Opposite of 'up'?", ["Down", "Left", "Right", "High"], "Down"],
+            ["Y. Synonyms & Antonyms", "Opposite of 'in'?", ["Out", "Under", "Over", "Next"], "Out"],
+            ["Y. Synonyms & Antonyms", "Opposite of 'good'?", ["Bad", "Great", "Nice", "Happy"], "Bad"],
+            ["Y. Synonyms & Antonyms", "Opposite of 'stop'?", ["Go", "Wait", "Pause", "Slow"], "Go"],
+            ["Y. Synonyms & Antonyms", "Opposite of 'clean'?", ["Dirty", "Washed", "Neat", "Tidy"], "Dirty"],
+            ["Y. Synonyms & Antonyms", "Synonym for 'mad'?", ["Angry", "Happy", "Glad", "Joyful"], "Angry"],
+            ["Y. Synonyms & Antonyms", "Synonym for 'sad'?", ["Unhappy", "Happy", "Glad", "Silly"], "Unhappy"],
+            ["Y. Synonyms & Antonyms", "Synonym for 'scared'?", ["Afraid", "Brave", "Bold", "Strong"], "Afraid"],
+            ["Y. Synonyms & Antonyms", "Synonym for 'jump'?", ["Leap", "Sit", "Run", "Walk"], "Leap"],
+            ["Y. Synonyms & Antonyms", "Synonym for 'yell'?", ["Shout", "Whisper", "Talk", "Sing"], "Shout"],
+
             // EE. Sentences
-            { skill: "EE. Sentences", question: "Which is a question?", options: ["How are you?", "I am fine.", "Stop that!", "The cat is big."], answer: "How are you?" },
-            { skill: "EE. Sentences", question: "Which is an exclamation?", options: ["Watch out!", "I like dogs.", "Where is it?", "The sky is blue."], answer: "Watch out!" },
+            ["EE. Sentences", "Which is a statement?", ["I like apples.", "Do you like apples?", "Eat the apple!", "Wow, an apple!"], "I like apples."],
+            ["EE. Sentences", "Which is a question?", ["Are you ready?", "I am ready.", "Get ready now.", "So ready!"], "Are you ready?"],
+            ["EE. Sentences", "Which is an exclamation?", ["That is amazing!", "Is that amazing?", "It is amazing.", "Look at that."], "That is amazing!"],
+            ["EE. Sentences", "Which is a command?", ["Clean your room.", "Your room is clean.", "Is it clean?", "How clean!"], "Clean your room."],
+            ["EE. Sentences", "Which needs a period (.)?", ["I have a bike", "Do you have a bike", "Wow, a bike", "Ride the bike"], "I have a bike"],
+            ["EE. Sentences", "Which needs a question mark (?)", ["Where is my shoe", "Here is my shoe", "Find my shoe", "My shoe is red"], "Where is my shoe"],
+            ["EE. Sentences", "Which needs an exclamation mark (!)", ["Look out for the car", "The car is blue", "Is the car blue", "I see a car"], "Look out for the car"],
+            ["EE. Sentences", "Which is a question?", ["Can we play?", "We can play.", "Play with me.", "So fun to play!"], "Can we play?"],
+            ["EE. Sentences", "Which is a statement?", ["My dog is brown.", "Where is my dog?", "Come here, dog!", "What a good dog!"], "My dog is brown."],
+            ["EE. Sentences", "Which is a command?", ["Brush your teeth.", "Did you brush?", "I brushed my teeth.", "Sparkly teeth!"], "Brush your teeth."],
+
             // FF. Nouns
-            { skill: "FF. Nouns", question: "Which word is a noun (person, place, or thing)?", options: ["Dog", "Run", "Quickly", "Happy"], answer: "Dog" },
-            { skill: "FF. Nouns", question: "Which word is a noun?", options: ["School", "Jump", "Blue", "Very"], answer: "School" },
+            ["FF. Nouns", "Which noun is a PERSON?", ["Teacher", "School", "Book", "Pencil"], "Teacher"],
+            ["FF. Nouns", "Which noun is a PLACE?", ["Beach", "Sand", "Crab", "Shell"], "Beach"],
+            ["FF. Nouns", "Which noun is a THING?", ["Car", "Driver", "Road", "City"], "Car"],
+            ["FF. Nouns", "Which noun is an ANIMAL?", ["Monkey", "Jungle", "Banana", "Tree"], "Monkey"],
+            ["FF. Nouns", "What is the plural of 'bus'?", ["Buses", "Buss", "Bus", "Busies"], "Buses"],
+            ["FF. Nouns", "What is the plural of 'dish'?", ["Dishes", "Dishs", "Dish", "Dishies"], "Dishes"],
+            ["FF. Nouns", "What is the plural of 'glass'?", ["Glasses", "Glasss", "Glass", "Glassies"], "Glasses"],
+            ["FF. Nouns", "Which is a proper noun (needs capital)?", ["Clariza", "girl", "student", "child"], "Clariza"],
+            ["FF. Nouns", "Which is a common noun?", ["toy", "Lego", "Barbie", "Hotwheels"], "toy"],
+            ["FF. Nouns", "Which word is a noun?", ["Shoe", "Run", "Fast", "Loud"], "Shoe"],
+
             // HH. Verbs
-            { skill: "HH. Verbs", question: "Which word is an action verb?", options: ["Jump", "Red", "Happy", "Fast"], answer: "Jump" },
-            { skill: "HH. Verbs", question: "Which word is a verb?", options: ["Run", "Apple", "Cat", "Tall"], answer: "Run" },
+            ["HH. Verbs", "Which is an action verb?", ["Dance", "Happy", "Red", "Loud"], "Dance"],
+            ["HH. Verbs", "Which is an action verb?", ["Sing", "Song", "Music", "Notes"], "Sing"],
+            ["HH. Verbs", "Which is an action verb?", ["Cry", "Tear", "Sad", "Face"], "Cry"],
+            ["HH. Verbs", "Which is an action verb?", ["Laugh", "Funny", "Joke", "Smile"], "Laugh"],
+            ["HH. Verbs", "Which is an action verb?", ["Build", "Block", "Tower", "Tall"], "Build"],
+            ["HH. Verbs", "Find the verb: 'The frog hops.'", ["hops", "The", "frog", "green"], "hops"],
+            ["HH. Verbs", "Find the verb: 'I drink water.'", ["drink", "I", "water", "cold"], "drink"],
+            ["HH. Verbs", "Find the verb: 'She paints a picture.'", ["paints", "She", "picture", "a"], "paints"],
+            ["HH. Verbs", "Find the verb: 'He kicks the ball.'", ["kicks", "He", "the", "ball"], "kicks"],
+            ["HH. Verbs", "Find the verb: 'We read books.'", ["read", "We", "books", "many"], "read"],
+
             // KK. Articles
-            { skill: "KK. Articles", question: "I saw ___ elephant at the zoo.", options: ["an", "a", "the", "two"], answer: "an" },
-            { skill: "KK. Articles", question: "I want to eat ___ banana.", options: ["a", "an", "the", "some"], answer: "a" }
+            ["KK. Articles", "I saw ___ octopus in the ocean.", ["an", "a", "the", "two"], "an"],
+            ["KK. Articles", "There is ___ snake in the grass.", ["a", "an", "the", "some"], "a"],
+            ["KK. Articles", "I found ___ insect on a leaf.", ["an", "a", "the", "one"], "an"],
+            ["KK. Articles", "We watched ___ tiger sleep.", ["a", "an", "the", "many"], "a"],
+            ["KK. Articles", "Look at ___ eagle fly!", ["an", "a", "the", "my"], "an"],
+            ["KK. Articles", "I want ___ orange.", ["an", "a", "the", "some"], "an"],
+            ["KK. Articles", "She ate ___ sandwich.", ["a", "an", "the", "two"], "a"],
+            ["KK. Articles", "I need ___ umbrella.", ["an", "a", "the", "my"], "an"],
+            ["KK. Articles", "He is ___ astronaut.", ["an", "a", "the", "one"], "an"],
+            ["KK. Articles", "We saw ___ rainbow.", ["a", "an", "the", "some"], "a"],
+
+            // V. Inference
+            ["V. Inference", "Smiling wide and jumping. How do they feel?", ["Excited", "Sad", "Angry", "Tired"], "Excited"],
+            ["V. Inference", "Throwing a toy and yelling. How do they feel?", ["Angry", "Happy", "Proud", "Sleepy"], "Angry"],
+            ["V. Inference", "Sleeping on the couch. How do they feel?", ["Tired", "Hungry", "Scared", "Excited"], "Tired"],
+            ["V. Inference", "Running away from a monster. How do they feel?", ["Scared", "Happy", "Bored", "Proud"], "Scared"],
+            ["V. Inference", "Looking at a broken plate. How do they feel?", ["Worried", "Joyful", "Sleepy", "Hungry"], "Worried"],
+            ["V. Inference", "Eating three slices of pizza. How do they feel?", ["Hungry", "Thirsty", "Sad", "Angry"], "Hungry"],
+            ["V. Inference", "Drinking a big glass of water. How do they feel?", ["Thirsty", "Hungry", "Tired", "Cold"], "Thirsty"],
+            ["V. Inference", "Wearing a thick coat and scarf. How do they feel?", ["Cold", "Hot", "Angry", "Happy"], "Cold"],
+            ["V. Inference", "Sweating and fanning themselves. How do they feel?", ["Hot", "Cold", "Sad", "Scared"], "Hot"],
+            ["V. Inference", "Showing Mom an A+ test. How do they feel?", ["Proud", "Angry", "Sad", "Tired"], "Proud"],
+
+            // M. Short & long sounds
+            ["M. Short & long sounds", "Which word has a SHORT 'a' sound?", ["Tap", "Tape", "Cake", "Lake"], "Tap"],
+            ["M. Short & long sounds", "Which word has a LONG 'a' sound?", ["Tape", "Tap", "Map", "Cap"], "Tape"],
+            ["M. Short & long sounds", "Which word has a SHORT 'e' sound?", ["Net", "Pete", "Tree", "See"], "Net"],
+            ["M. Short & long sounds", "Which word has a LONG 'e' sound?", ["Pete", "Net", "Pet", "Set"], "Pete"],
+            ["M. Short & long sounds", "Which word has a SHORT 'i' sound?", ["Sit", "Site", "Bite", "Kite"], "Sit"],
+            ["M. Short & long sounds", "Which word has a LONG 'i' sound?", ["Site", "Sit", "Bit", "Pit"], "Site"],
+            ["M. Short & long sounds", "Which word has a SHORT 'o' sound?", ["Pot", "Hope", "Rope", "Note"], "Pot"],
+            ["M. Short & long sounds", "Which word has a LONG 'o' sound?", ["Hope", "Hop", "Pop", "Top"], "Hope"],
+            ["M. Short & long sounds", "Which word has a SHORT 'u' sound?", ["Nut", "Cute", "Flute", "Mute"], "Nut"],
+            ["M. Short & long sounds", "Which word has a LONG 'u' sound?", ["Cute", "Cut", "Nut", "Hut"], "Cute"]
         ];
 
-        const year4Questions = [
-            // A. Short and long vowels
-            { skill: "A. Short and long vowels", question: "Which word has a LONG 'a' sound?", options: ["Cake", "Cat", "Apple", "Map"], answer: "Cake" },
-            { skill: "A. Short and long vowels", question: "Which word has a SHORT 'i' sound?", options: ["Pig", "Bike", "Kite", "Ice"], answer: "Pig" },
-            // F. Main idea
-            { skill: "F. Main idea", question: "Read: 'Apples, bananas, and kiwifruit are healthy snacks.' What is the main idea?", options: ["Fruit is healthy", "Apples are red", "Monkeys eat bananas", "Snacks are bad"], answer: "Fruit is healthy" },
-            { skill: "F. Main idea", question: "Read: 'Dogs need walks, food, and lots of love.' What is the main idea?", options: ["How to care for dogs", "Dogs like bones", "Cats are better", "Walking is fun"], answer: "How to care for dogs" },
-            // X. Opinion writing
-            { skill: "X. Opinion writing", question: "Which sentence is an OPINION?", options: ["Skateboarding is the best sport!", "A skateboard has wheels.", "You can wear a helmet.", "Skateboards roll on the ground."], answer: "Skateboarding is the best sport!" },
-            { skill: "X. Opinion writing", question: "Which of these is a FACT?", options: ["Spiders have eight legs.", "Spiders are scary.", "Spiders are the worst bug.", "I hate spiders."], answer: "Spiders have eight legs." },
-            // Z. Prefixes and suffixes
-            { skill: "Z. Prefixes and suffixes", question: "What does the suffix '-less' mean in the word 'fearless'?", options: ["Without", "Full of", "Again", "Before"], answer: "Without" },
-            { skill: "Z. Prefixes and suffixes", question: "What does the prefix 're-' mean in 'rewrite'?", options: ["To do again", "Not", "Before", "Too much"], answer: "To do again" },
-            // DD. Synonyms and antonyms
-            { skill: "DD. Synonyms and antonyms", question: "What is an antonym (opposite) of 'huge'?", options: ["Tiny", "Enormous", "Big", "Giant"], answer: "Tiny" },
-            { skill: "DD. Synonyms and antonyms", question: "What is a synonym (same) for 'smart'?", options: ["Clever", "Silly", "Slow", "Funny"], answer: "Clever" },
+        const rawY4 = [
+            // F. Main Idea (10)
+            ["F. Main Idea", "Read: 'Apples, bananas, and kiwifruit are healthy snacks.' Main idea?", ["Fruit is healthy", "Apples are red", "Monkeys eat bananas", "Snacks are bad"], "Fruit is healthy"],
+            ["F. Main Idea", "Read: 'Dogs need walks, food, and lots of love.' Main idea?", ["How to care for dogs", "Dogs like bones", "Cats are better", "Walking is fun"], "How to care for dogs"],
+            ["F. Main Idea", "Read: 'Bees carry pollen to help flowers grow.' Main idea?", ["Bees are helpful", "Bees sting", "Flowers are pretty", "Honey is sweet"], "Bees are helpful"],
+            ["F. Main Idea", "Read: 'Always wear a helmet and look both ways on a bike.' Main idea?", ["Bike safety", "Helmets are hard", "Bikes have wheels", "Looking around"], "Bike safety"],
+            ["F. Main Idea", "Read: 'Sharks have sharp teeth and live in the ocean.' Main idea?", ["Facts about sharks", "Fish are small", "Oceans are deep", "Teeth are white"], "Facts about sharks"],
+            ["F. Main Idea", "Read: 'Recycling plastic saves the earth and oceans.' Main idea?", ["Recycling is important", "Plastic is clear", "Oceans are wet", "Earth is round"], "Recycling is important"],
+            ["F. Main Idea", "Read: 'Rain gives water to plants and fills rivers.' Main idea?", ["Rain is necessary", "Clouds are gray", "Rivers are long", "Plants are green"], "Rain is necessary"],
+            ["F. Main Idea", "Read: 'Brushing twice a day keeps teeth clean.' Main idea?", ["Dental health", "Toothpaste is minty", "Brushes are soft", "Mouths are open"], "Dental health"],
+            ["F. Main Idea", "Read: 'Sunflowers follow the sun across the sky.' Main idea?", ["How sunflowers act", "The sun is hot", "The sky is blue", "Flowers are yellow"], "How sunflowers act"],
+            ["F. Main Idea", "Read: 'Exercising makes your heart and muscles strong.' Main idea?", ["Benefits of exercise", "Muscles are big", "Hearts beat fast", "Running is hard"], "Benefits of exercise"],
+
+            // X. Opinion Writing (10)
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Skateboards are the best!", "A skateboard has wheels.", "You wear a helmet.", "Skateboards roll."], "Skateboards are the best!"],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["Spiders have eight legs.", "Spiders are scary.", "Spiders are the worst.", "I hate spiders."], "Spiders have eight legs."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Pizza is delicious.", "Pizza has cheese.", "Pizza is baked.", "Pizza has crust."], "Pizza is delicious."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["Water freezes at 0 degrees.", "Winter is too cold.", "Snow is fun.", "Summer is better."], "Water freezes at 0 degrees."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Cats make perfect pets.", "Cats have fur.", "Cats meow.", "Cats have tails."], "Cats make perfect pets."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["The sun is a star.", "The sun is beautiful.", "Sunsets are romantic.", "Sunny days are the best."], "The sun is a star."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Chocolate is the best flavor.", "Chocolate is brown.", "Chocolate has sugar.", "Chocolate melts."], "Chocolate is the best flavor."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["Birds have feathers.", "Birds sing pretty songs.", "Parrots are annoying.", "Eagles are majestic."], "Birds have feathers."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Math is too hard.", "Math uses numbers.", "2 + 2 = 4.", "Triangles have 3 sides."], "Math is too hard."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["Fish live in water.", "Fish are boring.", "Fishing is relaxing.", "Goldfish are cute."], "Fish live in water."],
+
+            // Z. Prefixes & Suffixes (10)
+            ["Z. Prefixes & Suffixes", "What does '-less' mean in 'fearless'?", ["Without", "Full of", "Again", "Before"], "Without"],
+            ["Z. Prefixes & Suffixes", "What does 're-' mean in 'rewrite'?", ["To do again", "Not", "Before", "Too much"], "To do again"],
+            ["Z. Prefixes & Suffixes", "What does 'un-' mean in 'unhappy'?", ["Not", "Very", "Again", "Under"], "Not"],
+            ["Z. Prefixes & Suffixes", "What does 'pre-' mean in 'preheat'?", ["Before", "After", "During", "Not"], "Before"],
+            ["Z. Prefixes & Suffixes", "What does '-ful' mean in 'joyful'?", ["Full of", "Without", "Not", "Again"], "Full of"],
+            ["Z. Prefixes & Suffixes", "What does 'mis-' mean in 'misspell'?", ["Wrong", "Again", "Before", "Full of"], "Wrong"],
+            ["Z. Prefixes & Suffixes", "What does '-able' mean in 'washable'?", ["Can be done", "Not", "Without", "Before"], "Can be done"],
+            ["Z. Prefixes & Suffixes", "What does 'dis-' mean in 'dislike'?", ["Not / Opposite", "Very", "Again", "Full of"], "Not / Opposite"],
+            ["Z. Prefixes & Suffixes", "If 'color' gets '-ful', it means?", ["Full of color", "No color", "Color again", "Wrong color"], "Full of color"],
+            ["Z. Prefixes & Suffixes", "If 'build' gets 're-', it means?", ["Build again", "Do not build", "Build wrong", "Before building"], "Build again"],
+
+            // DD. Synonyms & Antonyms (10)
+            ["DD. Synonyms & Antonyms", "Antonym (opposite) of 'huge'?", ["Tiny", "Enormous", "Big", "Giant"], "Tiny"],
+            ["DD. Synonyms & Antonyms", "Synonym (same) for 'smart'?", ["Clever", "Silly", "Slow", "Funny"], "Clever"],
+            ["DD. Synonyms & Antonyms", "Antonym of 'start'?", ["Finish", "Begin", "Go", "First"], "Finish"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'tired'?", ["Sleepy", "Energetic", "Awake", "Fast"], "Sleepy"],
+            ["DD. Synonyms & Antonyms", "Antonym of 'loud'?", ["Quiet", "Noisy", "Screaming", "Deafening"], "Quiet"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'sad'?", ["Unhappy", "Joyful", "Glad", "Excited"], "Unhappy"],
+            ["DD. Synonyms & Antonyms", "Antonym of 'hard' (texture)?", ["Soft", "Solid", "Rock", "Firm"], "Soft"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'fast'?", ["Quick", "Slow", "Crawling", "Stopped"], "Quick"],
+            ["DD. Synonyms & Antonyms", "Antonym of 'day'?", ["Night", "Morning", "Noon", "Sun"], "Night"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'beautiful'?", ["Pretty", "Ugly", "Hideous", "Plain"], "Pretty"],
+
+            // EE. Homophones (10)
+            ["EE. Homophones", "I ___ a letter.", ["sent", "cent", "scent", "sents"], "sent"],
+            ["EE. Homophones", "I have ___ dogs.", ["two", "to", "too", "tow"], "two"],
+            ["EE. Homophones", "Look over ___!", ["there", "their", "they're", "thare"], "there"],
+            ["EE. Homophones", "That is ___ house.", ["their", "there", "they're", "thare"], "their"],
+            ["EE. Homophones", "___ going to the park.", ["They're", "Their", "There", "Thare"], "They're"],
+            ["EE. Homophones", "Can you ___ the ocean?", ["see", "sea", "cee", "si"], "see"],
+            ["EE. Homophones", "The boat is on the ___.", ["sea", "see", "cee", "si"], "sea"],
+            ["EE. Homophones", "I ___ an apple.", ["ate", "eight", "ait", "at"], "ate"],
+            ["EE. Homophones", "A spider has ___ legs.", ["eight", "ate", "ait", "at"], "eight"],
+            ["EE. Homophones", "The ___ is shining.", ["sun", "son", "sin", "san"], "sun"],
+
+            // LL. Nouns (10)
+            ["LL. Nouns", "Which is a proper noun (needs capital)?", ["Auckland", "city", "school", "beach"], "Auckland"],
+            ["LL. Nouns", "Plural of 'mouse'?", ["Mice", "Mouses", "Meese", "Mouse"], "Mice"],
+            ["LL. Nouns", "Plural of 'child'?", ["Children", "Childs", "Childes", "Childrens"], "Children"],
+            ["LL. Nouns", "Plural of 'foot'?", ["Feet", "Foots", "Footes", "Feets"], "Feet"],
+            ["LL. Nouns", "Plural of 'tooth'?", ["Teeth", "Tooths", "Toothes", "Teeths"], "Teeth"],
+            ["LL. Nouns", "Plural of 'leaf'?", ["Leaves", "Leafs", "Leafes", "Leavs"], "Leaves"],
+            ["LL. Nouns", "Plural of 'man'?", ["Men", "Mans", "Mannes", "Mens"], "Men"],
+            ["LL. Nouns", "Plural of 'woman'?", ["Women", "Womans", "Womens", "Woman"], "Women"],
+            ["LL. Nouns", "Which is a common noun?", ["river", "Waikato", "Monday", "Sam"], "river"],
+            ["LL. Nouns", "Plural of 'fox'?", ["Foxes", "Foxs", "Fox", "Foxies"], "Foxes"],
+
+            // PP. Verb Tense (10)
+            ["PP. Verb Tense", "Which is in the PAST tense?", ["I walked.", "I walk.", "I will walk.", "I am walking."], "I walked."],
+            ["PP. Verb Tense", "Which is in the FUTURE tense?", ["I will play.", "I played.", "I play.", "I am playing."], "I will play."],
+            ["PP. Verb Tense", "Which is in the PRESENT tense?", ["I jump.", "I jumped.", "I will jump.", "I was jumping."], "I jump."],
+            ["PP. Verb Tense", "Past tense of 'run'?", ["Ran", "Runned", "Running", "Runs"], "Ran"],
+            ["PP. Verb Tense", "Past tense of 'eat'?", ["Ate", "Eated", "Eating", "Eats"], "Ate"],
+            ["PP. Verb Tense", "Past tense of 'go'?", ["Went", "Goed", "Going", "Goes"], "Went"],
+            ["PP. Verb Tense", "Past tense of 'see'?", ["Saw", "Seed", "Seeing", "Sees"], "Saw"],
+            ["PP. Verb Tense", "Future tense of 'swim'?", ["Will swim", "Swam", "Swims", "Swimming"], "Will swim"],
+            ["PP. Verb Tense", "Present tense of 'to be' for 'He'?", ["Is", "Am", "Are", "Was"], "Is"],
+            ["PP. Verb Tense", "Past tense of 'to be' for 'They'?", ["Were", "Was", "Are", "Is"], "Were"],
+
+            // WW. Capitalisation (10)
+            ["WW. Capitalisation", "Which is capitalised correctly?", ["Mount Cook", "mount cook", "Mount cook", "mount Cook"], "Mount Cook"],
+            ["WW. Capitalisation", "Which day is correct?", ["Monday", "monday", "mOnday", "monDay"], "Monday"],
+            ["WW. Capitalisation", "Which month is correct?", ["January", "january", "JanUary", "janUary"], "January"],
+            ["WW. Capitalisation", "Which holiday is correct?", ["Christmas", "christmas", "ChristMas", "chrIstmas"], "Christmas"],
+            ["WW. Capitalisation", "Which name is correct?", ["Sarah", "sarah", "sArah", "saRah"], "Sarah"],
+            ["WW. Capitalisation", "Which country is correct?", ["New Zealand", "new zealand", "New zealand", "new Zealand"], "New Zealand"],
+            ["WW. Capitalisation", "Which city is correct?", ["Wellington", "wellington", "WellingTon", "wellIngton"], "Wellington"],
+            ["WW. Capitalisation", "Which sentence is correct?", ["I am happy.", "i am happy.", "I am Happy.", "i Am happy."], "I am happy."],
+            ["WW. Capitalisation", "Which ocean is correct?", ["Pacific Ocean", "pacific ocean", "Pacific ocean", "pacific Ocean"], "Pacific Ocean"],
+            ["WW. Capitalisation", "Which pet name is correct?", ["Buster", "buster", "bUster", "busTer"], "Buster"],
+
+            // KK. Sentences & Fragments (10)
+            ["KK. Sentences & Fragments", "Which is a complete sentence?", ["The cat slept.", "Running fast.", "In the house.", "The big apple."], "The cat slept."],
+            ["KK. Sentences & Fragments", "Which is a fragment?", ["Under the bed.", "He ran.", "We ate.", "She is tall."], "Under the bed."],
+            ["KK. Sentences & Fragments", "Which is a complete sentence?", ["Dogs bark loudly.", "Very fast.", "Because I said so.", "The green frog."], "Dogs bark loudly."],
+            ["KK. Sentences & Fragments", "Which is a fragment?", ["A tall tree.", "The tree fell.", "Birds sing.", "I am six."], "A tall tree."],
+            ["KK. Sentences & Fragments", "Which is a complete sentence?", ["I like pizza.", "Eating pizza.", "With extra cheese.", "My slice."], "I like pizza."],
+            ["KK. Sentences & Fragments", "Identify the subject: 'The dog ran.'", ["The dog", "ran", "The", "dog ran"], "The dog"],
+            ["KK. Sentences & Fragments", "Identify the predicate: 'The cat slept.'", ["slept", "The cat", "The", "cat slept"], "slept"],
+            ["KK. Sentences & Fragments", "Which is a run-on sentence?", ["I ran I fell.", "I ran fast.", "I fell down.", "Did you fall?"], "I ran I fell."],
+            ["KK. Sentences & Fragments", "Which is a complete sentence?", ["She reads books.", "A good book.", "Reading is.", "To the library."], "She reads books."],
+            ["KK. Sentences & Fragments", "Which is a fragment?", ["On the table.", "Dinner is ready.", "We will eat.", "I am hungry."], "On the table."],
+
+            // RR. Adjectives & Adverbs (10)
+            ["RR. Adjectives & Adverbs", "Which is an adjective?", ["Shiny", "Car", "Drove", "Quickly"], "Shiny"],
+            ["RR. Adjectives & Adverbs", "Which is an adverb?", ["Quickly", "Shiny", "Car", "Drove"], "Quickly"],
+            ["RR. Adjectives & Adverbs", "Find the adjective: 'The tall man.'", ["tall", "The", "man", "none"], "tall"],
+            ["RR. Adjectives & Adverbs", "Find the adverb: 'He ran slowly.'", ["slowly", "He", "ran", "none"], "slowly"],
+            ["RR. Adjectives & Adverbs", "Which word describes a noun?", ["Adjective", "Adverb", "Verb", "Pronoun"], "Adjective"],
+            ["RR. Adjectives & Adverbs", "Which word describes a verb?", ["Adverb", "Adjective", "Noun", "Article"], "Adverb"],
+            ["RR. Adjectives & Adverbs", "Find the adjective: 'A sweet apple.'", ["sweet", "A", "apple", "none"], "sweet"],
+            ["RR. Adjectives & Adverbs", "Find the adverb: 'She sang beautifully.'", ["beautifully", "She", "sang", "none"], "beautifully"],
+            ["RR. Adjectives & Adverbs", "Which adjective compares two things?", ["Taller", "Tallest", "Tall", "More tall"], "Taller"],
+            ["RR. Adjectives & Adverbs", "Which adjective compares three things?", ["Fastest", "Faster", "Fast", "More fast"], "Fastest"]
+
+                        // --- NEW YEAR 4 EXPANSION PACK ---
+            // F. Main Idea
+            ["F. Main Idea", "Read: 'Reading books every day makes your brain smarter.' Main idea?", ["Reading is good for you", "Books have pages", "Libraries are quiet", "Words are black"], "Reading is good for you"],
+            ["F. Main Idea", "Read: 'Eating vegetables helps you grow strong and tall.' Main idea?", ["Vegetables are healthy", "Carrots are orange", "Broccoli looks like trees", "Eating is fun"], "Vegetables are healthy"],
+            ["F. Main Idea", "Read: 'Playing sports teaches you how to work as a team.' Main idea?", ["Sports teach teamwork", "Footballs are brown", "Running is tiring", "Winning is everything"], "Sports teach teamwork"],
+            ["F. Main Idea", "Read: 'Saving your pocket money lets you buy bigger toys later.' Main idea?", ["Saving money is smart", "Piggy banks are pink", "Coins are heavy", "Toys are expensive"], "Saving money is smart"],
+            ["F. Main Idea", "Read: 'Drinking water is much better for you than sugary soda.' Main idea?", ["Water is the healthiest drink", "Soda is bubbly", "Cups hold liquids", "Ice is cold"], "Water is the healthiest drink"],
+            ["F. Main Idea", "Read: 'Planting trees gives animals a place to live.' Main idea?", ["Trees help wildlife", "Leaves are green", "Dirt is messy", "Branches fall"], "Trees help wildlife"],
+            ["F. Main Idea", "Read: 'Cleaning your room helps you find your toys faster.' Main idea?", ["A clean room is helpful", "Toys hide under beds", "Brooms sweep dirt", "Beds are soft"], "A clean room is helpful"],
+            ["F. Main Idea", "Read: 'Washing your hands stops germs from making you sick.' Main idea?", ["Hand washing keeps you healthy", "Soap smells good", "Sinks have water", "Bubbles are fun"], "Hand washing keeps you healthy"],
+            ["F. Main Idea", "Read: 'Practising math every day makes it much easier.' Main idea?", ["Practice improves math skills", "Numbers go up to 100", "Calculators have buttons", "Pencils break"], "Practice improves math skills"],
+            ["F. Main Idea", "Read: 'Getting lots of sleep gives you energy for the next day.' Main idea?", ["Sleep gives you energy", "Beds are cozy", "Dreams are weird", "Nighttime is dark"], "Sleep gives you energy"],
+
+            // X. Opinion Writing
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Math is a fun subject.", "Math uses numbers.", "A triangle has three sides.", "Two plus two is four."], "Math is a fun subject."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["The sky is blue.", "Blue is the best colour.", "Everyone loves the sky.", "Clouds look like animals."], "The sky is blue."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Apples are the tastiest fruit.", "Apples grow on trees.", "Apples have seeds.", "Apples can be red."], "Apples are the tastiest fruit."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["Dogs are mammals.", "Dogs are cuter than cats.", "Every home needs a dog.", "Big dogs are the best."], "Dogs are mammals."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Winter is a terrible season.", "It snows in winter.", "Winter is cold.", "December is a winter month in the UK."], "Winter is a terrible season."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["Auckland is a city in NZ.", "Auckland is too busy.", "Auckland is a beautiful place.", "Everyone should visit Auckland."], "Auckland is a city in NZ."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Ice cream is the best dessert.", "Ice cream is cold.", "Ice cream melts.", "Ice cream is made from milk."], "Ice cream is the best dessert."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["The earth is round.", "The earth is a lovely place.", "Space is terrifying.", "Mars is an ugly planet."], "The earth is round."],
+            ["X. Opinion Writing", "Which sentence is an OPINION?", ["Reading is better than TV.", "Books have covers.", "TVs have screens.", "You can read a book."], "Reading is better than TV."],
+            ["X. Opinion Writing", "Which of these is a FACT?", ["Spiders have eight legs.", "Spiders are creepy.", "Spiders belong outside.", "Spiders make terrible pets."], "Spiders have eight legs."],
+
+            // Z. Prefixes & Suffixes
+            ["Z. Prefixes & Suffixes", "What does '-ly' mean in 'softly'?", ["In a soft way", "Not soft", "Very soft", "Before soft"], "In a soft way"],
+            ["Z. Prefixes & Suffixes", "What does '-ment' mean in 'enjoyment'?", ["The state of enjoying", "Without enjoying", "Enjoying again", "Before enjoying"], "The state of enjoying"],
+            ["Z. Prefixes & Suffixes", "What does 'mis-' mean in 'misplace'?", ["Place incorrectly", "Place again", "Place before", "Place full of"], "Place incorrectly"],
+            ["Z. Prefixes & Suffixes", "What does 're-' mean in 'rebuild'?", ["Build again", "Not build", "Build before", "Build wrong"], "Build again"],
+            ["Z. Prefixes & Suffixes", "What does 'un-' mean in 'unkind'?", ["Not kind", "Very kind", "Kind again", "Kind before"], "Not kind"],
+            ["Z. Prefixes & Suffixes", "What does '-ful' mean in 'careful'?", ["Full of care", "Without care", "Care again", "Not care"], "Full of care"],
+            ["Z. Prefixes & Suffixes", "What does '-less' mean in 'hopeless'?", ["Without hope", "Full of hope", "Hope again", "Not hope"], "Without hope"],
+            ["Z. Prefixes & Suffixes", "What does 'pre-' mean in 'preview'?", ["View before", "View again", "View wrong", "Not view"], "View before"],
+            ["Z. Prefixes & Suffixes", "If 'color' gets '-less', it means?", ["Without color", "Full of color", "Color again", "Wrong color"], "Without color"],
+            ["Z. Prefixes & Suffixes", "If 'read' gets 're-', it means?", ["Read again", "Do not read", "Read wrong", "Before reading"], "Read again"],
+
+            // DD. Synonyms & Antonyms
+            ["DD. Synonyms & Antonyms", "Synonym for 'difficult'?", ["Hard", "Easy", "Simple", "Soft"], "Hard"],
+            ["DD. Synonyms & Antonyms", "Antonym for 'difficult'?", ["Easy", "Hard", "Tough", "Heavy"], "Easy"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'rich'?", ["Wealthy", "Poor", "Broke", "Empty"], "Wealthy"],
+            ["DD. Synonyms & Antonyms", "Antonym for 'rich'?", ["Poor", "Wealthy", "Rich", "Full"], "Poor"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'empty'?", ["Blank", "Full", "Stuffed", "Crowded"], "Blank"],
+            ["DD. Synonyms & Antonyms", "Antonym for 'empty'?", ["Full", "Blank", "Clear", "Nothing"], "Full"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'wild'?", ["Untamed", "Calm", "Tame", "Quiet"], "Untamed"],
+            ["DD. Synonyms & Antonyms", "Antonym for 'wild'?", ["Tame", "Crazy", "Mad", "Untamed"], "Tame"],
+            ["DD. Synonyms & Antonyms", "Synonym for 'angry'?", ["Furious", "Happy", "Glad", "Calm"], "Furious"],
+            ["DD. Synonyms & Antonyms", "Antonym for 'angry'?", ["Calm", "Furious", "Mad", "Upset"], "Calm"],
+
             // EE. Homophones
-            { skill: "EE. Homophones", question: "Choose the correct homophone: I ___ a letter to my friend.", options: ["sent", "cent", "scent", "sents"], answer: "sent" },
-            { skill: "EE. Homophones", question: "Choose the correct homophone: I have ___ dogs.", options: ["two", "to", "too", "tow"], answer: "two" },
+            ["EE. Homophones", "Turn to the ___.", ["right", "write", "rite", "wright"], "right"],
+            ["EE. Homophones", "I will ___ a story.", ["write", "right", "rite", "wright"], "write"],
+            ["EE. Homophones", "I ate the ___ pizza.", ["whole", "hole", "hoal", "howl"], "whole"],
+            ["EE. Homophones", "There is a ___ in my sock.", ["hole", "whole", "hoal", "howl"], "hole"],
+            ["EE. Homophones", "I want a ___ of cake.", ["piece", "peace", "peas", "peece"], "piece"],
+            ["EE. Homophones", "We all want world ___.", ["peace", "piece", "peas", "peece"], "peace"],
+            ["EE. Homophones", "The brown ___ growled.", ["bear", "bare", "bair", "bayer"], "bear"],
+            ["EE. Homophones", "He has ___ feet.", ["bare", "bear", "bair", "bayer"], "bare"],
+            ["EE. Homophones", "Bake the cake with ___.", ["flour", "flower", "flowr", "flourr"], "flour"],
+            ["EE. Homophones", "The red ___ is pretty.", ["flower", "flour", "flowr", "flourr"], "flower"],
+
             // LL. Nouns
-            { skill: "LL. Nouns", question: "Which word is a proper noun (needs a capital letter)?", options: ["Auckland", "city", "school", "beach"], answer: "Auckland" },
-            { skill: "LL. Nouns", question: "What is the plural of 'mouse'?", options: ["Mice", "Mouses", "Meese", "Mouse"], answer: "Mice" },
-            // PP. Verb tense
-            { skill: "PP. Verb tense", question: "Which sentence is in the PAST tense?", options: ["I walked to school.", "I walk to school.", "I will walk to school.", "I am walking."], answer: "I walked to school." },
-            { skill: "PP. Verb tense", question: "Which sentence is in the FUTURE tense?", options: ["I will play outside.", "I played outside.", "I play outside.", "I am playing."], answer: "I will play outside." },
+            ["LL. Nouns", "Which is a proper noun?", ["Friday", "day", "week", "month"], "Friday"],
+            ["LL. Nouns", "Which is a proper noun?", ["April", "month", "year", "time"], "April"],
+            ["LL. Nouns", "Which is a proper noun?", ["Wellington", "city", "town", "place"], "Wellington"],
+            ["LL. Nouns", "What is the plural of 'goose'?", ["Geese", "Gooses", "Geeses", "Goose"], "Geese"],
+            ["LL. Nouns", "What is the plural of 'half'?", ["Halves", "Halfs", "Halfes", "Halvs"], "Halves"],
+            ["LL. Nouns", "What is the plural of 'loaf'?", ["Loaves", "Loafs", "Loafes", "Loavs"], "Loaves"],
+            ["LL. Nouns", "What is the plural of 'shelf'?", ["Shelves", "Shelfs", "Shelfes", "Shelvs"], "Shelves"],
+            ["LL. Nouns", "What is the plural of 'wolf'?", ["Wolves", "Wolfs", "Wolfes", "Wolvs"], "Wolves"],
+            ["LL. Nouns", "Which is a common noun?", ["dog", "Buster", "Rover", "Rex"], "dog"],
+            ["LL. Nouns", "Which is a proper noun?", ["Mars", "planet", "star", "space"], "Mars"],
+
+            // PP. Verb Tense
+            ["PP. Verb Tense", "Past tense of 'catch'?", ["Caught", "Catched", "Catching", "Catches"], "Caught"],
+            ["PP. Verb Tense", "Past tense of 'bring'?", ["Brought", "Bringed", "Bringing", "Brings"], "Brought"],
+            ["PP. Verb Tense", "Past tense of 'think'?", ["Thought", "Thinked", "Thinking", "Thinks"], "Thought"],
+            ["PP. Verb Tense", "Past tense of 'teach'?", ["Taught", "Teached", "Teaching", "Teaches"], "Taught"],
+            ["PP. Verb Tense", "Past tense of 'hide'?", ["Hid", "Hided", "Hiding", "Hides"], "Hid"],
+            ["PP. Verb Tense", "Past tense of 'bite'?", ["Bit", "Bited", "Biting", "Bites"], "Bit"],
+            ["PP. Verb Tense", "Past tense of 'drive'?", ["Drove", "Drived", "Driving", "Drives"], "Drove"],
+            ["PP. Verb Tense", "Future tense of 'run'?", ["Will run", "Ran", "Runs", "Running"], "Will run"],
+            ["PP. Verb Tense", "Future tense of 'jump'?", ["Will jump", "Jumped", "Jumps", "Jumping"], "Will jump"],
+            ["PP. Verb Tense", "Past tense of 'fly'?", ["Flew", "Flyed", "Flying", "Flies"], "Flew"],
+
             // WW. Capitalisation
-            { skill: "WW. Capitalisation", question: "Which of these is capitalised correctly?", options: ["Mount Cook", "mount cook", "Mount cook", "mount Cook"], answer: "Mount Cook" },
-            { skill: "WW. Capitalisation", question: "Which day is capitalised correctly?", options: ["Monday", "monday", "mOnday", "monDay"], answer: "Monday" }
+            ["WW. Capitalisation", "Which is correct?", ["Easter", "easter", "eAsteR", "EasteR"], "Easter"],
+            ["WW. Capitalisation", "Which is correct?", ["Mr. Smith", "mr. smith", "Mr. smith", "mr. Smith"], "Mr. Smith"],
+            ["WW. Capitalisation", "Which is correct?", ["Sky Tower", "sky tower", "Sky tower", "sky Tower"], "Sky Tower"],
+            ["WW. Capitalisation", "Which is correct?", ["Lake Taupo", "lake taupo", "Lake taupo", "lake Taupo"], "Lake Taupo"],
+            ["WW. Capitalisation", "Which is correct?", ["Dr. Jones", "dr. jones", "Dr. jones", "dr. Jones"], "Dr. Jones"],
+            ["WW. Capitalisation", "Which is correct?", ["Aunt Mary", "aunt mary", "Aunt mary", "aunt Mary"], "Aunt Mary"],
+            ["WW. Capitalisation", "Which is correct?", ["Tuesday", "tuesday", "tUesday", "TuesDay"], "Tuesday"],
+            ["WW. Capitalisation", "Which is correct?", ["October", "october", "oCtObeR", "octoBer"], "October"],
+            ["WW. Capitalisation", "Which is correct?", ["South Island", "south island", "South island", "south Island"], "South Island"],
+            ["WW. Capitalisation", "Which is correct?", ["Captain Cook", "captain cook", "Captain cook", "captain Cook"], "Captain Cook"],
+
+            // KK. Sentences & Fragments
+            ["KK. Sentences & Fragments", "Identify the subject: 'The big cat slept.'", ["The big cat", "slept", "The", "cat slept"], "The big cat"],
+            ["KK. Sentences & Fragments", "Identify the predicate: 'The small dog barked.'", ["barked", "The small dog", "The", "dog barked"], "barked"],
+            ["KK. Sentences & Fragments", "Which is a run-on sentence?", ["I ate I slept.", "I ate food.", "I slept well.", "Did you eat?"], "I ate I slept."],
+            ["KK. Sentences & Fragments", "Which is a complete sentence?", ["The sun is hot.", "Very hot sun.", "Because it is hot.", "Shining sun."], "The sun is hot."],
+            ["KK. Sentences & Fragments", "Which is a fragment?", ["A red car.", "The car is red.", "I see a car.", "Drive the car."], "A red car."],
+            ["KK. Sentences & Fragments", "Identify the subject: 'My best friend laughed.'", ["My best friend", "laughed", "My", "friend laughed"], "My best friend"],
+            ["KK. Sentences & Fragments", "Identify the predicate: 'The tall tree fell.'", ["fell", "The tall tree", "The", "tree fell"], "fell"],
+            ["KK. Sentences & Fragments", "Which is a run-on sentence?", ["It rained we got wet.", "It rained.", "We got wet.", "Did it rain?"], "It rained we got wet."],
+            ["KK. Sentences & Fragments", "Which is a complete sentence?", ["She plays tennis.", "Playing tennis.", "With a racket.", "On the court."], "She plays tennis."],
+            ["KK. Sentences & Fragments", "Which is a fragment?", ["In the morning.", "I woke up.", "She is here.", "We will go."], "In the morning."],
+
+            // RR. Adjectives & Adverbs
+            ["RR. Adjectives & Adverbs", "Find the adverb: 'She spoke softly.'", ["softly", "She", "spoke", "none"], "softly"],
+            ["RR. Adjectives & Adverbs", "Find the adverb: 'He walked slowly.'", ["slowly", "He", "walked", "none"], "slowly"],
+            ["RR. Adjectives & Adverbs", "Find the adjective: 'The loud music.'", ["loud", "The", "music", "none"], "loud"],
+            ["RR. Adjectives & Adverbs", "Find the adjective: 'A bright star.'", ["bright", "A", "star", "none"], "bright"],
+            ["RR. Adjectives & Adverbs", "Which adjective compares two things?", ["Louder", "Loudest", "Loud", "More loud"], "Louder"],
+            ["RR. Adjectives & Adverbs", "Which adjective compares three things?", ["Smartest", "Smarter", "Smart", "More smart"], "Smartest"],
+            ["RR. Adjectives & Adverbs", "Which adjective compares two things?", ["Faster", "Fastest", "Fast", "More fast"], "Faster"],
+            ["RR. Adjectives & Adverbs", "Which adjective compares three things?", ["Tallest", "Taller", "Tall", "More tall"], "Tallest"],
+            ["RR. Adjectives & Adverbs", "Find the adverb: 'They happily played.'", ["happily", "They", "played", "none"], "happily"],
+            ["RR. Adjectives & Adverbs", "Find the adjective: 'A deep ocean.'", ["deep", "A", "ocean", "none"], "deep"]
         ];
+
+        // Convert raw arrays into usable objects
+        const year2Questions = rawY2.map(q => ({ skill: q[0], question: q[1], options: q[2], answer: q[3] }));
+        const year4Questions = rawY4.map(q => ({ skill: q[0], question: q[1], options: q[2], answer: q[3] }));
 
         // GAME LOGIC VARIABLES
         let currentCharacter = 'clariza'; 
@@ -428,7 +679,7 @@
         const progressBar = document.getElementById("progress-bar");
         const gameTitle = document.getElementById("game-title");
 
-        selectCharacter('clariza'); // Default
+        selectCharacter('clariza'); 
 
         function selectCharacter(char) {
             currentCharacter = char;
@@ -457,45 +708,44 @@
 
         function initializeGame() {
             if('speechSynthesis' in window) window.speechSynthesis.cancel();
-
             const lengthSelection = document.getElementById("length-select").value;
             let database = (currentCharacter === 'clariza') ? year2Questions : year4Questions;
 
             // --- SMART SHUFFLE SYSTEM ---
-            // 1. Group questions by their skill topic
             let groupedSkills = {};
             database.forEach(q => {
                 if(!groupedSkills[q.skill]) groupedSkills[q.skill] = [];
                 groupedSkills[q.skill].push(q);
             });
 
-            // 2. Pick ONE random question from each skill bucket
-            let uniqueTopicQuestions = [];
-            for(let skill in groupedSkills) {
-                let questionsInBucket = groupedSkills[skill];
-                let randomQuestion = questionsInBucket[Math.floor(Math.random() * questionsInBucket.length)];
-                uniqueTopicQuestions.push(randomQuestion);
-            }
-
-            // 3. Shuffle those unique topics and slice them to the requested length
-            let randomizedDB = shuffle(uniqueTopicQuestions);
+            // Play ALL mode vs Standard length mode
             if (lengthSelection === "all") {
-                currentQuestionList = randomizedDB;
+                currentQuestionList = shuffle(database); // Just shuffle all 100 questions
             } else {
-                currentQuestionList = randomizedDB.slice(0, parseInt(lengthSelection));
+                // If 10 or 20 questions, grab unique topics to prevent repeats!
+                let uniqueTopicQuestions = [];
+                let loopCount = (parseInt(lengthSelection) === 20) ? 2 : 1; 
+
+                for(let i=0; i < loopCount; i++) {
+                    for(let skill in groupedSkills) {
+                        let questionsInBucket = groupedSkills[skill];
+                        let randomQuestion = questionsInBucket[Math.floor(Math.random() * questionsInBucket.length)];
+                        // Make sure we don't pick the exact same question twice
+                        if(!uniqueTopicQuestions.includes(randomQuestion)) {
+                            uniqueTopicQuestions.push(randomQuestion);
+                        }
+                    }
+                }
+                currentQuestionList = shuffle(uniqueTopicQuestions).slice(0, parseInt(lengthSelection));
             }
 
-            // Reset scores
             currentQuestionIndex = 0;
             score = 0;
             scoreBox.innerText = score;
-
-            // Swap UI
             setupMenu.style.display = "none";
             restartBtn.style.display = "none";
             gamePlayArea.style.display = "block";
             skillTag.style.display = "inline-block";
-            
             showQuestion();
         }
 
@@ -539,8 +789,7 @@
         function playQuestionAudio() {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel(); 
-                const text = questionBox.innerText;
-                const utterance = new SpeechSynthesisUtterance(text);
+                const utterance = new SpeechSynthesisUtterance(questionBox.innerText);
                 utterance.rate = 0.9; 
                 utterance.pitch = 1.1; 
                 window.speechSynthesis.speak(utterance);
@@ -552,7 +801,6 @@
         function selectAnswer(selected, correct, buttonElement) {
             if (isAnswering) return; 
             isAnswering = true;
-
             const buttons = document.querySelectorAll('.btn');
             
             if (selected === correct) {
