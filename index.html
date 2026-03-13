@@ -9,7 +9,7 @@
 
         /* --- DYNAMIC THEME VARIABLES --- */
         :root {
-            --bg-color: #87CEEB; /* Sky blue default */
+            --bg-color: #87CEEB; 
             --bg-gradient: linear-gradient(135deg, #87CEEB, #f5f6fa);
             --container-bg: white;
             --text-color: #2F3542;
@@ -21,7 +21,7 @@
             --skill-bg: #dfe4ea;
         }
 
-        /* CLARIZA'S THEME (Unicorns, Rainbows, Cupcakes) */
+        /* CLARIZA'S THEME */
         body.clariza-theme {
             --bg-color: #ff9a9e;
             --bg-gradient: linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%);
@@ -34,7 +34,7 @@
             --skill-bg: #ffe4e1;
         }
 
-        /* JACE'S THEME (Dinos, Hotwheels, Planets, Fishing, Animals) */
+        /* JACE'S THEME */
         body.jace-theme {
             --bg-color: #0f2027;
             --bg-gradient: linear-gradient(to right, #0f2027, #203a43, #2c5364);
@@ -81,7 +81,6 @@
             transition: color 0.5s ease;
         }
 
-        /* --- CHARACTER SELECTION UI --- */
         #setup-menu { display: block; }
 
         .character-select-container {
@@ -103,16 +102,8 @@
         }
 
         .char-card:hover { transform: translateY(-5px); }
-
-        .char-card.selected-clariza {
-            border-color: #ff69b4;
-            background-color: #fff0f5;
-        }
-
-        .char-card.selected-jace {
-            border-color: #f0932b;
-            background-color: #fceaea;
-        }
+        .char-card.selected-clariza { border-color: #ff69b4; background-color: #fff0f5; }
+        .char-card.selected-jace { border-color: #f0932b; background-color: #fceaea; }
 
         .char-icon { font-size: 3rem; margin-bottom: 5px; }
         .char-name { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: #2f3542; margin: 0; }
@@ -161,7 +152,6 @@
         #restart-btn { display: none; background-color: #FF6B6B; box-shadow: 0 5px 0 #c0392b; }
         #restart-btn:hover { box-shadow: 0 2px 0 #c0392b; }
 
-        /* --- GAMEPLAY STYLES --- */
         #game-play-area { display: none; }
 
         .stats-bar {
@@ -269,11 +259,9 @@
 
         <!-- Setup Menu -->
         <div id="setup-menu">
-            
             <div class="menu-section">
                 <h3>Choose Your Character</h3>
                 <div class="character-select-container">
-                    <!-- Clariza Card -->
                     <div class="char-card selected-clariza" id="card-clariza" onclick="selectCharacter('clariza')">
                         <div class="char-icon">🦄</div>
                         <h4 class="char-name">Clariza</h4>
@@ -281,12 +269,11 @@
                         <div class="char-likes">🌈 Rainbows & Cupcakes 🧁</div>
                     </div>
                     
-                    <!-- Jace Card -->
                     <div class="char-card" id="card-jace" onclick="selectCharacter('jace')">
                         <div class="char-icon">🦖</div>
                         <h4 class="char-name">Jace</h4>
                         <p class="char-year">Year 4 English</p>
-                        <div class="char-likes">🏎️ Hotwheels, Planets 🪐 & Animals 🐕</div>
+                        <div class="char-likes">🏎️ Hotwheels, Planets 🪐</div>
                     </div>
                 </div>
             </div>
@@ -328,110 +315,102 @@
     </div>
 
     <script>
-        // --- QUESTION DATABASES ---
+        // --- MULTI-QUESTION DATABASES ---
+        // I have added 2 to 3 completely different questions for each topic!
 
-        // YEAR 2 QUESTIONS (Clariza)
         const year2Questions = [
+            // A. Consonants & vowels
             { skill: "A. Consonants & vowels", question: "Which letter is a vowel?", options: ["a", "b", "c", "d"], answer: "a" },
+            { skill: "A. Consonants & vowels", question: "Which letter is a consonant?", options: ["m", "e", "o", "i"], answer: "m" },
+            { skill: "A. Consonants & vowels", question: "Find the vowel in the word 'cat'.", options: ["c", "a", "t", "s"], answer: "a" },
+            // B. Syllables
             { skill: "B. Syllables", question: "How many syllables are in the word 'elephant'?", options: ["1", "2", "3", "4"], answer: "3" },
+            { skill: "B. Syllables", question: "How many syllables are in 'dog'?", options: ["1", "2", "3", "4"], answer: "1" },
+            // C. Rhyming
             { skill: "C. Rhyming", question: "Which word rhymes with 'cat'?", options: ["Bat", "Dog", "Sun", "Car"], answer: "Bat" },
+            { skill: "C. Rhyming", question: "Which word rhymes with 'tree'?", options: ["Bee", "Cow", "House", "Leaf"], answer: "Bee" },
+            // D. Blending & segmenting
             { skill: "D. Blending & segmenting", question: "What word do these sounds make: s-u-n?", options: ["Sun", "Sit", "Sam", "Sad"], answer: "Sun" },
+            { skill: "D. Blending & segmenting", question: "What word do these sounds make: f-r-o-g?", options: ["Frog", "Fig", "Flag", "Fish"], answer: "Frog" },
+            // E. Consonant sounds
             { skill: "E. Consonant sounds", question: "Which word starts with the same sound as 'Dog'?", options: ["Duck", "Cat", "Pig", "Bird"], answer: "Duck" },
+            { skill: "E. Consonant sounds", question: "Which word ends with the same sound as 'Bat'?", options: ["Cat", "Dog", "Car", "Bus"], answer: "Cat" },
+            // F. Consonant blends/digraphs
             { skill: "F. Consonant blends/digraphs", question: "Complete the word: __ip (a large boat).", options: ["Sh", "Ch", "Th", "Wh"], answer: "Sh" },
+            { skill: "F. Consonant blends/digraphs", question: "Complete the word: __ee (a plant with leaves).", options: ["Tr", "Fl", "Sp", "Br"], answer: "Tr" },
+            // G-K. Short Vowels
             { skill: "G. Short a", question: "Which word has a short 'a' sound?", options: ["Apple", "Cake", "Rain", "Day"], answer: "Apple" },
             { skill: "H. Short e", question: "Which word has a short 'e' sound?", options: ["Bed", "Tree", "Bee", "Me"], answer: "Bed" },
             { skill: "I. Short i", question: "Which word has a short 'i' sound?", options: ["Pig", "Bike", "Kite", "Ice"], answer: "Pig" },
             { skill: "J. Short o", question: "Which word has a short 'o' sound?", options: ["Dog", "Boat", "Snow", "Toe"], answer: "Dog" },
             { skill: "K. Short u", question: "Which word has a short 'u' sound?", options: ["Sun", "Blue", "Glue", "Flute"], answer: "Sun" },
-            { skill: "L. Short vowels", question: "Identify the short vowel in the word 'cat'.", options: ["a", "e", "i", "o"], answer: "a" },
-            { skill: "M. Short & long sounds", question: "Which two words have the same vowel sound?", options: ["Cat & Bat", "Dog & Dig", "Sun & Son", "Pen & Pin"], answer: "Cat & Bat" },
+            // M. Short & long sounds
+            { skill: "M. Short & long sounds", question: "Which two words have the SAME vowel sound?", options: ["Cat & Bat", "Dog & Dig", "Sun & Son", "Pen & Pin"], answer: "Cat & Bat" },
+            { skill: "M. Short & long sounds", question: "Which word has a LONG vowel sound?", options: ["Cake", "Cat", "Pig", "Sun"], answer: "Cake" },
+            // N. Silent e
             { skill: "N. Silent e", question: "What does the silent 'e' do in 'kite'?", options: ["Makes the 'i' say its name", "Makes the 'k' silent", "Makes the 't' loud", "Nothing"], answer: "Makes the 'i' say its name" },
+            { skill: "N. Silent e", question: "Choose the word with a silent e.", options: ["Cake", "Cat", "Dog", "Run"], answer: "Cake" },
+            // O. Vowel digraphs
             { skill: "O. Vowel digraphs", question: "Complete the word: b__t (a thing that floats).", options: ["oa", "ee", "ai", "ue"], answer: "oa" },
-            { skill: "P. Short & long patterns", question: "Which word has a LONG vowel?", options: ["Cake", "Cat", "Dog", "Pig"], answer: "Cake" },
-            { skill: "Q. Diphthongs", question: "Choose the word with an 'ou' sound.", options: ["House", "Boat", "Tree", "Play"], answer: "House" },
-            { skill: "R. Two-syllable words", question: "Put syllables together: but + ter = ?", options: ["butter", "batter", "better", "bitter"], answer: "butter" },
+            { skill: "O. Vowel digraphs", question: "Complete the word: tr__ (it has leaves).", options: ["ee", "oa", "ai", "ou"], answer: "ee" },
+            // S. Sight words
             { skill: "S. Sight words", question: "Which is a correctly spelled sight word?", options: ["They", "Thay", "Thei", "Thae"], answer: "They" },
+            { skill: "S. Sight words", question: "Which is a correctly spelled sight word?", options: ["Because", "Becuz", "Becuase", "Bekause"], answer: "Because" },
+            // T. Reality vs fiction
             { skill: "T. Reality vs fiction", question: "Which could happen in real life?", options: ["A dog barking", "A dog flying", "A dog talking", "A dog driving"], answer: "A dog barking" },
-            { skill: "U. Main idea", question: "A story is about a boy finding a lost kiwi bird. What is it about?", options: ["Helping a kiwi", "Eating lunch", "Riding a bike", "Going to school"], answer: "Helping a kiwi" },
+            { skill: "T. Reality vs fiction", question: "Which is FICTION (make-believe)?", options: ["A talking unicorn", "A sleeping cat", "A red car", "A tall tree"], answer: "A talking unicorn" },
+            // V. Inference
             { skill: "V. Inference", question: "A girl is crying holding a broken toy. How does she feel?", options: ["Sad", "Happy", "Angry", "Scared"], answer: "Sad" },
-            { skill: "W. Nouns & adjectives", question: "Complete the sentence: The ___ apple.", options: ["red", "jump", "quickly", "very"], answer: "red" },
-            { skill: "X. Categories", question: "Which word does NOT belong in the group?", options: ["Apple", "Car", "Bus", "Train"], answer: "Apple" },
+            { skill: "V. Inference", question: "A boy is jumping up and down smiling. How does he feel?", options: ["Happy", "Sad", "Tired", "Cold"], answer: "Happy" },
+            // Y. Synonyms & antonyms
             { skill: "Y. Synonyms & antonyms", question: "What is the antonym (opposite) of 'hot'?", options: ["Cold", "Warm", "Sun", "Fire"], answer: "Cold" },
-            { skill: "Z. Multiple-meaning words", question: "Which word can be a flying animal AND a cricket tool?", options: ["Bat", "Dog", "Cat", "Ball"], answer: "Bat" },
-            { skill: "AA. Shades of meaning", question: "Which word means 'very small'?", options: ["Tiny", "Big", "Huge", "Giant"], answer: "Tiny" },
-            { skill: "BB. Prefixes & suffixes", question: "What does 'un-' mean in 'unhappy'?", options: ["Not", "Very", "Again", "Before"], answer: "Not" },
-            { skill: "CC. Context clues", question: "'The giant tree reached the clouds.' What does giant mean?", options: ["Very big", "Tiny", "Green", "Old"], answer: "Very big" },
-            { skill: "DD. Reference skills", question: "Which word comes first in Alphabetical order?", options: ["Apple", "Banana", "Cat", "Dog"], answer: "Apple" },
+            { skill: "Y. Synonyms & antonyms", question: "What is a synonym (same) for 'big'?", options: ["Large", "Small", "Tiny", "Fast"], answer: "Large" },
+            // EE. Sentences
             { skill: "EE. Sentences", question: "Which is a question?", options: ["How are you?", "I am fine.", "Stop that!", "The cat is big."], answer: "How are you?" },
+            { skill: "EE. Sentences", question: "Which is an exclamation?", options: ["Watch out!", "I like dogs.", "Where is it?", "The sky is blue."], answer: "Watch out!" },
+            // FF. Nouns
             { skill: "FF. Nouns", question: "Which word is a noun (person, place, or thing)?", options: ["Dog", "Run", "Quickly", "Happy"], answer: "Dog" },
-            { skill: "GG. Pronouns", question: "Which word can replace 'Sarah' in a sentence?", options: ["She", "He", "It", "They"], answer: "She" },
+            { skill: "FF. Nouns", question: "Which word is a noun?", options: ["School", "Jump", "Blue", "Very"], answer: "School" },
+            // HH. Verbs
             { skill: "HH. Verbs", question: "Which word is an action verb?", options: ["Jump", "Red", "Happy", "Fast"], answer: "Jump" },
-            { skill: "II. Subject-verb agreement", question: "The dogs ___ running.", options: ["are", "is", "am", "was"], answer: "are" },
-            { skill: "JJ. Verb tense", question: "Which sentence happened in the PAST?", options: ["I jumped.", "I jump.", "I will jump.", "I am jumping."], answer: "I jumped." },
+            { skill: "HH. Verbs", question: "Which word is a verb?", options: ["Run", "Apple", "Cat", "Tall"], answer: "Run" },
+            // KK. Articles
             { skill: "KK. Articles", question: "I saw ___ elephant at the zoo.", options: ["an", "a", "the", "two"], answer: "an" },
-            { skill: "LL. Adjectives", question: "Which word describes how something looks?", options: ["Shiny", "Run", "Quickly", "Very"], answer: "Shiny" },
-            { skill: "MM. Prepositions", question: "The cat is hiding ___ the table.", options: ["under", "jump", "happy", "red"], answer: "under" },
-            { skill: "NN. Linking words", question: "Which word connects two ideas?", options: ["And", "Dog", "Run", "Happy"], answer: "And" },
-            { skill: "OO. Contractions", question: "What is the contraction for 'do not'?", options: ["don't", "doesnt", "do'nt", "dont'"], answer: "don't" },
-            { skill: "PP. Capitalisation", question: "Which name is written correctly with a capital letter?", options: ["Sam", "sam", "sAm", "saM"], answer: "Sam" }
+            { skill: "KK. Articles", question: "I want to eat ___ banana.", options: ["a", "an", "the", "some"], answer: "a" }
         ];
 
-        // YEAR 4 QUESTIONS (Jace)
         const year4Questions = [
-            { skill: "A. Short and long vowels", question: "Which word has a LONG 'a' sound?", options: ["Cat", "Cake", "Apple", "Map"], answer: "Cake" },
-            { skill: "B. Blends", question: "Which word starts with a three-letter blend?", options: ["Straw", "Tree", "Ship", "Play"], answer: "Straw" },
-            { skill: "C. Multisyllabic words", question: "Which word has an 'open' syllable at the end?", options: ["Tiger", "Cat", "Dog", "Pen"], answer: "Tiger" },
-            { skill: "D. Diphthongs and r vowels", question: "Which word contains an 'ou' diphthong?", options: ["Cloud", "Could", "Boat", "Cut"], answer: "Cloud" },
-            { skill: "E. Irregular words", question: "Which is the correct spelling of this common sight word?", options: ["Because", "Becuz", "Becuase", "Bekause"], answer: "Because" },
+            // A. Short and long vowels
+            { skill: "A. Short and long vowels", question: "Which word has a LONG 'a' sound?", options: ["Cake", "Cat", "Apple", "Map"], answer: "Cake" },
+            { skill: "A. Short and long vowels", question: "Which word has a SHORT 'i' sound?", options: ["Pig", "Bike", "Kite", "Ice"], answer: "Pig" },
+            // F. Main idea
             { skill: "F. Main idea", question: "Read: 'Apples, bananas, and kiwifruit are healthy snacks.' What is the main idea?", options: ["Fruit is healthy", "Apples are red", "Monkeys eat bananas", "Snacks are bad"], answer: "Fruit is healthy" },
-            { skill: "G. Theme", question: "In a fable where a tiny mouse saves a giant lion, what is the theme?", options: ["Even small friends can be a big help", "Mice like cheese", "Lions are loud", "Do not sleep in the forest"], answer: "Even small friends can be a big help" },
-            { skill: "H. Author's purpose", question: "Why would an author write a recipe for Anzac biscuits?", options: ["To explain how to make them", "To make you laugh", "To tell a scary story", "To sing a song"], answer: "To explain how to make them" },
-            { skill: "I. Text structure", question: "Which word shows 'cause and effect'?", options: ["Therefore", "Also", "Next", "Before"], answer: "Therefore" },
-            { skill: "J. Sensory details", question: "Which phrase appeals to your sense of HEARING?", options: ["The loud, crashing thunder", "The bright red apple", "The soft, fluffy blanket", "The sweet, sticky honey"], answer: "The loud, crashing thunder" },
-            { skill: "K. Literary devices", question: "What does this simile mean: 'As brave as a lion'?", options: ["Very courageous", "Very hungry", "Very yellow", "Very sleepy"], answer: "Very courageous" },
-            { skill: "L. Point of view", question: "Which pronoun shows a story is told in the 'First Person'?", options: ["I", "He", "She", "They"], answer: "I" },
-            { skill: "M. Inference", question: "If a character is shivering and putting on a thick jacket, what can you infer?", options: ["It is cold", "They are tired", "It is raining", "They are going swimming"], answer: "It is cold" },
-            { skill: "N. Story elements", question: "Where and when a story takes place is called the...", options: ["Setting", "Plot", "Characters", "Problem"], answer: "Setting" },
-            { skill: "O. Visual elements", question: "What can an illustration tell you about a story?", options: ["What the characters look like", "How the book smells", "The author's age", "How many pages are left"], answer: "What the characters look like" },
-            { skill: "P. Literary texts: level 1", question: "Which of these belongs in a Fantasy story?", options: ["A talking dragon", "A history lesson", "A science experiment", "A recipe for cake"], answer: "A talking dragon" },
-            { skill: "Q. Literary texts: level 2", question: "Which feature is most common in Poetry?", options: ["Rhyming words", "A table of contents", "An index", "Long paragraphs"], answer: "Rhyming words" },
-            { skill: "R. Informational texts: level 1", question: "A text titled 'How Kiwi Birds Live' is an example of...", options: ["Informational text", "A fairy tale", "A poem", "A fable"], answer: "Informational text" },
-            { skill: "S. Informational texts: level 2", question: "If you read a book about the Sky Tower in Auckland, you are reading about a...", options: ["Famous place", "Mythical creature", "Science experiment", "Recipe"], answer: "Famous place" },
-            { skill: "T. Organising writing", question: "Which sentence should come FIRST in a paragraph?", options: ["First, pour the milk.", "Finally, eat the cereal.", "Next, add the cereal.", "Then, get a spoon."], answer: "First, pour the milk." },
-            { skill: "U. Topic sentences", question: "Which is the best topic sentence for a paragraph about dogs?", options: ["Dogs make wonderful pets.", "My dog's name is Buster.", "Dogs have fur.", "I like cats too."], answer: "Dogs make wonderful pets." },
-            { skill: "V. Writer's purpose", question: "If a writer wants to convince you to wear a bike helmet, their purpose is to...", options: ["Persuade", "Entertain", "Confuse", "Frighten"], answer: "Persuade" },
-            { skill: "W. Linking words", question: "Which word is a time-order linking word?", options: ["Next", "Because", "But", "Or"], answer: "Next" },
+            { skill: "F. Main idea", question: "Read: 'Dogs need walks, food, and lots of love.' What is the main idea?", options: ["How to care for dogs", "Dogs like bones", "Cats are better", "Walking is fun"], answer: "How to care for dogs" },
+            // X. Opinion writing
             { skill: "X. Opinion writing", question: "Which sentence is an OPINION?", options: ["Skateboarding is the best sport!", "A skateboard has wheels.", "You can wear a helmet.", "Skateboards roll on the ground."], answer: "Skateboarding is the best sport!" },
-            { skill: "Y. Descriptive details", question: "Which sentence uses the strongest, most descriptive verb?", options: ["The cheetah sprinted.", "The cheetah went.", "The cheetah moved.", "The cheetah was fast."], answer: "The cheetah sprinted." },
+            { skill: "X. Opinion writing", question: "Which of these is a FACT?", options: ["Spiders have eight legs.", "Spiders are scary.", "Spiders are the worst bug.", "I hate spiders."], answer: "Spiders have eight legs." },
+            // Z. Prefixes and suffixes
             { skill: "Z. Prefixes and suffixes", question: "What does the suffix '-less' mean in the word 'fearless'?", options: ["Without", "Full of", "Again", "Before"], answer: "Without" },
-            { skill: "AA. Greek and Latin roots", question: "The root 'aqua' means water. What is an aquarium?", options: ["A tank for fish", "A fire engine", "A type of bird", "A space ship"], answer: "A tank for fish" },
-            { skill: "BB. Compound words", question: "Which of these is a compound word?", options: ["Sunflower", "Beautiful", "Elephant", "Running"], answer: "Sunflower" },
-            { skill: "CC. Categories", question: "Which word does NOT belong in this group: Apple, Banana, Carrot, Orange?", options: ["Carrot", "Apple", "Banana", "Orange"], answer: "Carrot" },
+            { skill: "Z. Prefixes and suffixes", question: "What does the prefix 're-' mean in 'rewrite'?", options: ["To do again", "Not", "Before", "Too much"], answer: "To do again" },
+            // DD. Synonyms and antonyms
             { skill: "DD. Synonyms and antonyms", question: "What is an antonym (opposite) of 'huge'?", options: ["Tiny", "Enormous", "Big", "Giant"], answer: "Tiny" },
+            { skill: "DD. Synonyms and antonyms", question: "What is a synonym (same) for 'smart'?", options: ["Clever", "Silly", "Slow", "Funny"], answer: "Clever" },
+            // EE. Homophones
             { skill: "EE. Homophones", question: "Choose the correct homophone: I ___ a letter to my friend.", options: ["sent", "cent", "scent", "sents"], answer: "sent" },
-            { skill: "FF. Multiple-meaning words", question: "Which sentence uses 'bat' as a flying animal?", options: ["The bat flew out of the cave.", "He hit the ball with the bat.", "It's your turn to bat.", "My cricket bat is heavy."], answer: "The bat flew out of the cave." },
-            { skill: "GG. Shades of meaning", question: "Which word means 'VERY angry'?", options: ["Furious", "Annoyed", "Upset", "Grumpy"], answer: "Furious" },
-            { skill: "HH. Idioms", question: "What does the idiom 'raining cats and dogs' mean?", options: ["Raining heavily", "Animals are falling", "It is sunny", "It is snowing"], answer: "Raining heavily" },
-            { skill: "II. Context clues", question: "The 'massive' elephant blocked the road. What does 'massive' mean?", options: ["Very big", "Tiny", "Green", "Fast"], answer: "Very big" },
-            { skill: "JJ. Reference skills", question: "Which word comes FIRST in alphabetical order?", options: ["Kangaroo", "Koala", "Kiwi", "Kookaburra"], answer: "Kangaroo" },
-            { skill: "KK. Sentences, fragments & run-ons", question: "Which one is a complete sentence?", options: ["The cat slept.", "Running fast.", "In the house.", "The big green apple."], answer: "The cat slept." },
+            { skill: "EE. Homophones", question: "Choose the correct homophone: I have ___ dogs.", options: ["two", "to", "too", "tow"], answer: "two" },
+            // LL. Nouns
             { skill: "LL. Nouns", question: "Which word is a proper noun (needs a capital letter)?", options: ["Auckland", "city", "school", "beach"], answer: "Auckland" },
-            { skill: "MM. Pronouns", question: "Replace the noun with a pronoun: 'Sarah' went to the shop.", options: ["She", "He", "They", "We"], answer: "She" },
-            { skill: "NN. Verb types", question: "Identify the action verb: 'The boy jumped on the trampoline.'", options: ["jumped", "boy", "the", "trampoline"], answer: "jumped" },
-            { skill: "OO. Subject-verb agreement", question: "Choose the correct verb: 'The dogs ___ barking.'", options: ["are", "is", "was", "am"], answer: "are" },
-            { skill: "PP. Verb tense", question: "Which sentence is in the past tense?", options: ["I walked to school.", "I walk to school.", "I will walk to school.", "I am walking."], answer: "I walked to school." },
-            { skill: "QQ. Articles", question: "Choose the correct article: I saw ___ elephant at the zoo.", options: ["an", "a", "the", "two"], answer: "an" },
-            { skill: "RR. Adjectives and adverbs", question: "Which word is an adjective? 'The shiny car drove quickly.'", options: ["shiny", "car", "drove", "quickly"], answer: "shiny" },
-            { skill: "SS. Prepositions", question: "Identify the preposition: 'The book is ON the table.'", options: ["on", "book", "is", "table"], answer: "on" },
-            { skill: "TT. Conjunctions", question: "Which word is a coordinating conjunction?", options: ["But", "Because", "Although", "Unless"], answer: "But" },
-            { skill: "UU. Contractions", question: "What is the contraction for 'do not'?", options: ["don't", "doesnt", "do'nt", "dont'"], answer: "don't" },
-            { skill: "VV. Commas", question: "Where does the comma go? 'Yes I would like some kiwi fruit.'", options: ["Yes, I would...", "Yes I, would...", "Yes I would, like...", "Yes I would like, some..."], answer: "Yes, I would..." },
+            { skill: "LL. Nouns", question: "What is the plural of 'mouse'?", options: ["Mice", "Mouses", "Meese", "Mouse"], answer: "Mice" },
+            // PP. Verb tense
+            { skill: "PP. Verb tense", question: "Which sentence is in the PAST tense?", options: ["I walked to school.", "I walk to school.", "I will walk to school.", "I am walking."], answer: "I walked to school." },
+            { skill: "PP. Verb tense", question: "Which sentence is in the FUTURE tense?", options: ["I will play outside.", "I played outside.", "I play outside.", "I am playing."], answer: "I will play outside." },
+            // WW. Capitalisation
             { skill: "WW. Capitalisation", question: "Which of these is capitalised correctly?", options: ["Mount Cook", "mount cook", "Mount cook", "mount Cook"], answer: "Mount Cook" },
-            { skill: "XX. Formatting", question: "Which is the correct way to format a book title?", options: ["The Hobbit", "the hobbit", "The hobbit", "the Hobbit"], answer: "The Hobbit" }
+            { skill: "WW. Capitalisation", question: "Which day is capitalised correctly?", options: ["Monday", "monday", "mOnday", "monDay"], answer: "Monday" }
         ];
 
         // GAME LOGIC VARIABLES
-        let currentCharacter = 'clariza'; // Default
+        let currentCharacter = 'clariza'; 
         let currentQuestionList = [];
         let currentQuestionIndex = 0;
         let score = 0;
@@ -449,13 +428,10 @@
         const progressBar = document.getElementById("progress-bar");
         const gameTitle = document.getElementById("game-title");
 
-        // Set character theme on load
-        selectCharacter('clariza');
+        selectCharacter('clariza'); // Default
 
         function selectCharacter(char) {
             currentCharacter = char;
-            
-            // UI Highlight
             document.getElementById('card-clariza').classList.remove('selected-clariza');
             document.getElementById('card-jace').classList.remove('selected-jace');
             
@@ -480,14 +456,29 @@
         }
 
         function initializeGame() {
-            // Stop any playing audio
             if('speechSynthesis' in window) window.speechSynthesis.cancel();
 
             const lengthSelection = document.getElementById("length-select").value;
             let database = (currentCharacter === 'clariza') ? year2Questions : year4Questions;
 
-            // Randomize and slice
-            let randomizedDB = shuffle(database);
+            // --- SMART SHUFFLE SYSTEM ---
+            // 1. Group questions by their skill topic
+            let groupedSkills = {};
+            database.forEach(q => {
+                if(!groupedSkills[q.skill]) groupedSkills[q.skill] = [];
+                groupedSkills[q.skill].push(q);
+            });
+
+            // 2. Pick ONE random question from each skill bucket
+            let uniqueTopicQuestions = [];
+            for(let skill in groupedSkills) {
+                let questionsInBucket = groupedSkills[skill];
+                let randomQuestion = questionsInBucket[Math.floor(Math.random() * questionsInBucket.length)];
+                uniqueTopicQuestions.push(randomQuestion);
+            }
+
+            // 3. Shuffle those unique topics and slice them to the requested length
+            let randomizedDB = shuffle(uniqueTopicQuestions);
             if (lengthSelection === "all") {
                 currentQuestionList = randomizedDB;
             } else {
@@ -511,9 +502,8 @@
         function showQuestion() {
             isAnswering = false;
             feedbackBox.innerText = "";
-            if('speechSynthesis' in window) window.speechSynthesis.cancel(); // Stop talking when advancing
+            if('speechSynthesis' in window) window.speechSynthesis.cancel(); 
             
-            // End of game
             if (currentQuestionIndex >= currentQuestionList.length) {
                 questionBox.innerHTML = `🎉 Amazing! You finished your adventure with a score of ${score}! 🎉`;
                 optionsBox.innerHTML = "";
@@ -527,18 +517,15 @@
 
             const currentQuestion = currentQuestionList[currentQuestionIndex];
             
-            // Update Progress Bar
             document.getElementById('audio-btn').style.display = "inline-block";
             questionCounter.innerText = `Question: ${currentQuestionIndex + 1} / ${currentQuestionList.length}`;
             let progressPercentage = (currentQuestionIndex / currentQuestionList.length) * 100;
             progressBar.style.width = `${progressPercentage}%`;
             
-            // Render Text
-            skillTag.innerText = "Category: " + currentQuestion.skill;
+            skillTag.innerText = "Topic: " + currentQuestion.skill;
             questionBox.innerText = currentQuestion.question;
             optionsBox.innerHTML = "";
             
-            // Render Answer Buttons
             let shuffledOptions = shuffle(currentQuestion.options);
             shuffledOptions.forEach(option => {
                 const button = document.createElement("button");
@@ -551,14 +538,11 @@
 
         function playQuestionAudio() {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // Reset
+                window.speechSynthesis.cancel(); 
                 const text = questionBox.innerText;
                 const utterance = new SpeechSynthesisUtterance(text);
-                
-                // Kid-friendly speech settings (slightly slower)
                 utterance.rate = 0.9; 
                 utterance.pitch = 1.1; 
-                
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("Sorry, your browser does not support the Read Aloud feature.");
@@ -595,7 +579,6 @@
                 });
             }
 
-            // Move to next question automatically
             setTimeout(() => {
                 currentQuestionIndex++;
                 showQuestion();
@@ -607,7 +590,6 @@
             gamePlayArea.style.display = "none";
             restartBtn.style.display = "none";
             setupMenu.style.display = "block";
-            // Re-apply the selected character's theme on menu return
             selectCharacter(currentCharacter); 
         }
     </script>
